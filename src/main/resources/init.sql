@@ -45,7 +45,7 @@ create table attributes_table
 create table values_table
 (
     attribute_id int,
-    product_id int,
+    product_id   int,
     value_int    int,
     value_string text,
     value_bool   boolean,
@@ -72,7 +72,7 @@ create table signatures
 
 create table order_details
 (
-    order_id   int primary key ,
+    order_id   int primary key,
     product_id int,
     quantity   int,
     price      int,
@@ -88,4 +88,16 @@ create table orders
     foreign key (order_id) references order_details (order_id),
     foreign key (customer_id) references users (id)
 );
+
+INSERT INTO users
+VALUES ('user1', 'user1@user1', 'user1', false),
+       ('user2', 'user2@user2', 'user2', false),
+       ('pro1', 'pro1@pro1', 'pro1', true);
+
+INSERT INTO types_table
+VALUES ('width'),
+       ('weight'),
+       ('stiffness'),
+       ('diameter'),
+       ('size');
 
