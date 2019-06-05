@@ -70,6 +70,49 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
         return null;
     }
 
+    @Override
+    public int countAllProducts() throws SQLException {
+        String sql = "SELECT COUNT(id) as count FROM products";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            List<Product> products = new ArrayList<>();
+            if (resultSet.next()) {
+                return resultSet.getInt("count");
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public Product[] findbyPriceDESC() throws SQLException {
+        Product[] ascending = new Product[countAllProducts()];
+        String sql = "SELECT * FROM products ORDER BY (price) DESC";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            int count = 0;
+            while (resultSet.next()) {
+                ascending[count] = fetchProduct(resultSet);
+                count++;
+            }
+            return ascending;
+        }
+    }
+
+    @Override
+    public Product[] findbyPriceASC() throws SQLException {
+        Product[] ascending = new Product[countAllProducts()];
+        String sql = "SELECT * FROM products ORDER BY (price) ASC";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            int count = 0;
+            while (resultSet.next()) {
+                ascending[count] = fetchProduct(resultSet);
+                count++;
+            }
+            return ascending;
+        }
+    }
+
     private Product fetchProduct(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         int typeId = resultSet.getInt("type_id");
