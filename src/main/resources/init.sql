@@ -13,7 +13,6 @@ CREATE TABLE users
     username TEXT        NOT NULL,
     email    TEXT UNIQUE NOT NULL,
     password TEXT        NOT NULL,
-    money    int         not null,
     role     BOOLEAN,
     CONSTRAINT email_not_empty CHECK (email <> ''),
     CONSTRAINT password_not_empty CHECK (password <> '')
