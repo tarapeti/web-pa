@@ -19,63 +19,70 @@ CREATE TABLE users
 );
 
 
-CREATE TABLE products(
-    id SERIAL PRIMARY KEY,
+CREATE TABLE products
+(
+    id      SERIAL PRIMARY KEY,
     type_id int,
-    name text,
-    brand text,
-    price int,
+    name    text,
+    brand   text,
+    price   int,
     foreign key (type_id) references types_table (id)
 
 );
 
-create table types_table(
-    id serial primary key,
+create table types_table
+(
+    id   serial primary key,
     name text
 );
 
-create table values_table(
-    product_id int,
+create table values_table
+(
+    product_id   int,
     attribute_id int,
-    value_int int,
+    value_int    int,
     value_string text,
-    value_bool boolean,
-    foreign key (product_id) references products(id),
+    value_bool   boolean,
+    foreign key (product_id) references products (id),
     foreign key (attribute_id) references attributes_table (id)
 );
 
-create table attributes_table(
-    id serial primary key,
+create table attributes_table
+(
+    id             serial primary key,
     attribute_name text,
-    value_type text
+    value_type     text
 );
 
-create table signatures(
-    pro_id int,
-    deck_id int,
-    grip_id int,
+create table signatures
+(
+    pro_id   int,
+    deck_id  int,
+    grip_id  int,
     truck_id int,
     wheel_id int,
-    foreign key (pro_id) references users(id),
-    foreign key (deck_id) references products(id),
-    foreign key (grip_id) references products(id),
-    foreign key (truck_id) references products(id),
-    foreign key (wheel_id) references products(id)
+    foreign key (pro_id) references users (id),
+    foreign key (deck_id) references products (id),
+    foreign key (grip_id) references products (id),
+    foreign key (truck_id) references products (id),
+    foreign key (wheel_id) references products (id)
 );
 
-create table orders(
-    order_id int,
+create table orders
+(
+    order_id    int,
     customer_id int,
-    foreign key (order_id) references order_details(order_id),
-    foreign key (customer_id) references users(id)
+    foreign key (order_id) references order_details (order_id),
+    foreign key (customer_id) references users (id)
 );
 
-create table order_details(
-    order_id int,
+create table order_details
+(
+    order_id   int,
     product_id int,
-    quantity int,
-    price int,
-    date date,
-    foreign key (product_id) references products(id)
+    quantity   int,
+    price      int,
+    date       date,
+    foreign key (product_id) references products (id)
 
 );

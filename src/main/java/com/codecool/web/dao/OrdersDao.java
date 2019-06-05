@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface OrdersDao {
     List<Order> findAll() throws SQLException;
+
     Order findbyOrderId(int orderId) throws SQLException;
+
     List<Order> findbyCustomerId(int customerId) throws SQLException;
 
 }
