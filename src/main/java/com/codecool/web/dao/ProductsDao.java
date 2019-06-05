@@ -1,6 +1,7 @@
 package com.codecool.web.dao;
 
 import com.codecool.web.model.Product;
+import com.codecool.web.model.Type;
 
 import java.sql.Array;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ public interface ProductsDao {
     int countAllProducts() throws SQLException;
     Product[] findbyPriceASC() throws SQLException;
     Product[] findbyPriceDESC() throws SQLException;
+    Type findType(int typeId) throws SQLException;
 
 
 }

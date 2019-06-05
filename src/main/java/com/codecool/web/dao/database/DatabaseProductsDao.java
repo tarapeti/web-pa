@@ -3,6 +3,7 @@ package com.codecool.web.dao.database;
 import com.codecool.web.dao.ProductsDao;
 import com.codecool.web.model.Attribure;
 import com.codecool.web.model.Product;
+import com.codecool.web.model.Type;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -99,6 +100,20 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
     }
 
     @Override
+    public Type findType(int prodId) throws SQLException {
+        String sql = "SELECT * FROM types_table INNER JOIN products p on types_table.id = p.type_id WHERE p.type_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, prodId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return fetchType(resultSet);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
     public Product[] findbyPriceASC() throws SQLException {
         Product[] ascending = new Product[countAllProducts()];
         String sql = "SELECT * FROM products ORDER BY (price) ASC";
@@ -121,4 +136,11 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
         int price = resultSet.getInt("price");
         return new Product(id, typeId, name, brand, price);
     }
+
+    private Type fetchType(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        return new Type(id, name);
+    }
+
 }
