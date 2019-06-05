@@ -99,19 +99,6 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
         }
     }
 
-    @Override
-    public Type findType(int prodId) throws SQLException {
-        String sql = "SELECT * FROM types_table INNER JOIN products p on types_table.id = p.type_id WHERE p.type_id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, prodId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    return fetchType(resultSet);
-                }
-            }
-        }
-        return null;
-    }
 
     @Override
     public Product[] findbyPriceASC() throws SQLException {
@@ -135,12 +122,6 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
         String brand = resultSet.getString("brand");
         int price = resultSet.getInt("price");
         return new Product(id, typeId, name, brand, price);
-    }
-
-    private Type fetchType(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
-        String name = resultSet.getString("name");
-        return new Type(id, name);
     }
 
 }

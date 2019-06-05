@@ -15,7 +15,7 @@ public interface ProductsDao {
     int countAllProducts() throws SQLException;
     Product[] findbyPriceASC() throws SQLException;
     Product[] findbyPriceDESC() throws SQLException;
-    Type findType(int typeId) throws SQLException;
+    
 
 
 }
