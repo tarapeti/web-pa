@@ -38,12 +38,10 @@ create table types_table
 
 create table values_table
 (
-    product_id   int,
     attribute_id int,
     value_int    int,
     value_string text,
     value_bool   boolean,
-    foreign key (product_id) references products (id),
     foreign key (attribute_id) references attributes_table (id)
 );
 

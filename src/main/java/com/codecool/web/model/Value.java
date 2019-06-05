@@ -4,23 +4,19 @@ import java.util.Objects;
 
 public class Value {
 
-    private final int productId;
+
     private final int attributeId;
     private final int intValue;
-    private final int stringValue;
+    private final String stringValue;
     private final boolean booleanValue;
 
-    public Value( int productId, int attributeId, int intValue, int stringValue, boolean booleanValue) {
-        this.productId = productId;
+    public Value(int attributeId, int intValue, String stringValue, boolean booleanValue) {
         this.attributeId = attributeId;
         this.intValue = intValue;
         this.stringValue = stringValue;
         this.booleanValue = booleanValue;
     }
 
-    public int getProductId() {
-        return productId;
-    }
 
     public int getAttributeId() {
         return attributeId;
@@ -30,7 +26,7 @@ public class Value {
         return intValue;
     }
 
-    public int getStringValue() {
+    public String getStringValue() {
         return stringValue;
     }
 
@@ -42,10 +38,8 @@ public class Value {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         Value value = (Value) o;
-        return getProductId() == value.getProductId() &&
-                getAttributeId() == value.getAttributeId() &&
+        return getAttributeId() == value.getAttributeId() &&
                 getIntValue() == value.getIntValue() &&
                 getStringValue() == value.getStringValue() &&
                 isBooleanValue() == value.isBooleanValue();
@@ -53,6 +47,6 @@ public class Value {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getProductId(), getAttributeId(), getIntValue(), getStringValue(), isBooleanValue());
+        return Objects.hash(getAttributeId(), getIntValue(), getStringValue(), isBooleanValue());
     }
 }
