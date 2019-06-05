@@ -41,6 +41,20 @@ public class DatabaseValueDao extends AbstractDao implements ValuesDao {
     }
 
     @Override
+    public Value findbyProductId(int productId) throws SQLException {
+        String sql = "SELECT * FROM values_table where product_id= ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, productId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return fetchValue(resultSet);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
     public String stringValuebyAttibuteId(int attributeId) throws SQLException {
         String sql = "SELECT value_string as sValue FROM values_table where value_string = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -84,9 +98,10 @@ public class DatabaseValueDao extends AbstractDao implements ValuesDao {
 
     private Value fetchValue(ResultSet resultSet) throws SQLException {
         int attributeId = resultSet.getInt("attribute_id");
+        int productId = resultSet.getInt("product_id");
         String valueString = resultSet.getString("value_string");
         int valueInt = resultSet.getInt("value_it");
         boolean valueBool = resultSet.getBoolean("value_bool");
-        return new Value(attributeId, valueInt, valueString, valueBool);
+        return new Value(attributeId, productId, valueInt, valueString, valueBool);
     }
 }

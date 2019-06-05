@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS types_table;
-DROP TABLE IF EXISTS values_table;
-DROP TABLE IF EXISTS attributes_table;
-DROP TABLE IF EXISTS signatures;
-DROP TABLE IF EXISTS order_details;
-DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS users cascade;
+DROP TABLE IF EXISTS products cascade;
+DROP TABLE IF EXISTS types_table cascade;
+DROP TABLE IF EXISTS values_table cascade;
+DROP TABLE IF EXISTS attributes_table cascade;
+DROP TABLE IF EXISTS signatures cascade;
+DROP TABLE IF EXISTS order_details cascade;
+DROP TABLE IF EXISTS orders cascade;
 
 CREATE TABLE users
 (
@@ -18,6 +18,11 @@ CREATE TABLE users
     CONSTRAINT password_not_empty CHECK (password <> '')
 );
 
+create table types_table
+(
+    id   serial primary key,
+    name text
+);
 
 CREATE TABLE products
 (
@@ -30,27 +35,25 @@ CREATE TABLE products
 
 );
 
-create table types_table
-(
-    id   serial primary key,
-    name text
-);
-
-create table values_table
-(
-    attribute_id int,
-    value_int    int,
-    value_string text,
-    value_bool   boolean,
-    foreign key (attribute_id) references attributes_table (id)
-);
-
 create table attributes_table
 (
     id             serial primary key,
     attribute_name text,
     value_type     text
 );
+
+create table values_table
+(
+    attribute_id int,
+    product_id int,
+    value_int    int,
+    value_string text,
+    value_bool   boolean,
+    foreign key (attribute_id) references attributes_table (id),
+    foreign key (product_id) references products (id)
+);
+
+
 
 create table signatures
 (
@@ -66,6 +69,18 @@ create table signatures
     foreign key (wheel_id) references products (id)
 );
 
+
+create table order_details
+(
+    order_id   int primary key ,
+    product_id int,
+    quantity   int,
+    price      int,
+    date       date,
+    foreign key (product_id) references products (id)
+
+);
+
 create table orders
 (
     order_id    int,
@@ -74,13 +89,3 @@ create table orders
     foreign key (customer_id) references users (id)
 );
 
-create table order_details
-(
-    order_id   int,
-    product_id int,
-    quantity   int,
-    price      int,
-    date       date,
-    foreign key (product_id) references products (id)
-
-);

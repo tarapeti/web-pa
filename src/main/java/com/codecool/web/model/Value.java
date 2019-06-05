@@ -6,20 +6,25 @@ public class Value {
 
 
     private final int attributeId;
+    private final int productId;
     private final int intValue;
     private final String stringValue;
     private final boolean booleanValue;
 
-    public Value(int attributeId, int intValue, String stringValue, boolean booleanValue) {
+    public Value(int attributeId, int productId, int intValue, String stringValue, boolean booleanValue) {
         this.attributeId = attributeId;
+        this.productId = productId;
         this.intValue = intValue;
         this.stringValue = stringValue;
         this.booleanValue = booleanValue;
     }
 
-
     public int getAttributeId() {
         return attributeId;
+    }
+
+    public int getProductId() {
+        return productId;
     }
 
     public int getIntValue() {
@@ -40,13 +45,14 @@ public class Value {
         if (o == null || getClass() != o.getClass()) return false;
         Value value = (Value) o;
         return getAttributeId() == value.getAttributeId() &&
+                getProductId() == value.getProductId() &&
                 getIntValue() == value.getIntValue() &&
-                getStringValue() == value.getStringValue() &&
-                isBooleanValue() == value.isBooleanValue();
+                isBooleanValue() == value.isBooleanValue() &&
+                Objects.equals(getStringValue(), value.getStringValue());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAttributeId(), getIntValue(), getStringValue(), isBooleanValue());
+        return Objects.hash(getAttributeId(), getProductId(), getIntValue(), getStringValue(), isBooleanValue());
     }
 }
