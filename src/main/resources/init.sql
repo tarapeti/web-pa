@@ -89,15 +89,43 @@ create table orders
     foreign key (customer_id) references users (id)
 );
 
-INSERT INTO users
+INSERT INTO users(username, email, password, role)
 VALUES ('user1', 'user1@user1', 'user1', false),
        ('user2', 'user2@user2', 'user2', false),
-       ('pro1', 'pro1@pro1', 'pro1', true);
+       ('pro1', 'pro1@pro1', 'pro1', true),
+       ('pro2', 'pro2@pro2', 'pro2', true);
 
-INSERT INTO types_table
-VALUES ('width'),
-       ('weight'),
-       ('stiffness'),
-       ('diameter'),
-       ('size');
+INSERT INTO types_table(name)
+VALUES ('deck'),
+       ('grip'),
+       ('truck'),
+       ('wheel'),
+       ('other');
+
+INSERT INTO products(type_id, name, brand, price)
+VALUES (1, 'OG Logo Red Mini Deck', 'BLIND', 30),
+       (2, 'Green/Yellow Griptape', 'Shake Junt', 10),
+       (3, 'Black Widow Full Dip Scripts Truck', 'Thunder', 22),
+       (4, 'Trippy OG Wheels', 'BLIND', 17),
+       (1, 'Pro Deck', 'Pro', 100),
+       (2, 'Pro Grip', 'Pro', 100),
+       (3, 'Pro Truck', 'Pro', 100),
+       (4, 'Pro Wheels', 'BLIND', 100);
+
+INSERT INTO attributes_table(attribute_name, value_type)
+VALUES ('width', 'integer'),
+       ('weight', 'int'),
+       ('color', 'string'),
+       ('diameter', 'int');
+
+INSERT INTO values_table(attribute_id, product_id, value_int, value_string, value_bool)
+VALUES (1, 1, 7, null, null),
+       (2, 3, 700, null, null),
+       (2, 2, 7, null, null),
+       (1, 3, 150, null, null),
+       (4, 4, 52, null, null),
+       (1, 5, 8, null, null),
+       (3, 6, 0, 'red', null),
+       (2, 7, 10, null, null),
+       (4, 8, 50, null, null);
 
