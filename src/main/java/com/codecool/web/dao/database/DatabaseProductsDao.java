@@ -1,9 +1,9 @@
 package com.codecool.web.dao.database;
 
 import com.codecool.web.dao.ProductsDao;
-import com.codecool.web.model.Attribure;
+
 import com.codecool.web.model.Product;
-import com.codecool.web.model.Type;
+
 
 import java.sql.*;
 import java.util.ArrayList;

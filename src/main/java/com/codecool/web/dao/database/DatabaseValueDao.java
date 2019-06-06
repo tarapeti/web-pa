@@ -1,7 +1,6 @@
 package com.codecool.web.dao.database;
 
 import com.codecool.web.dao.ValuesDao;
-import com.codecool.web.model.User;
 import com.codecool.web.model.Value;
 
 import java.sql.*;
