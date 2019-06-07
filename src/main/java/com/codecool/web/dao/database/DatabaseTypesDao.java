@@ -55,7 +55,7 @@ public class DatabaseTypesDao extends AbstractDao implements TypesDao {
     }
 
     @Override
-    public Type findProductbyType(int prodId) throws SQLException {
+    public Type findTypebyProductId(int prodId) throws SQLException {
         String sql = "SELECT * FROM types_table INNER JOIN products p on types_table.id = p.type_id WHERE p.type_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, prodId);

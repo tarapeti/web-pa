@@ -13,5 +13,5 @@ public interface TypesDao {
 
     List<Type> findbyName(String name) throws SQLException;
 
-    Type findProductbyType(int prodId) throws SQLException;
+    Type findTypebyProductId(int prodId) throws SQLException;
 }
