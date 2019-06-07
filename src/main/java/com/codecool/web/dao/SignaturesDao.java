@@ -17,7 +17,7 @@ public interface SignaturesDao {
 
     Product findProductbyGripId(int gripId) throws SQLException;
 
-    Product findProductbyWheelId(int gripId) throws SQLException;
+    Product findProductbyWheelId(int wheelId) throws SQLException;
 
     Signature findbyDeckId(int deckId) throws SQLException;
 
