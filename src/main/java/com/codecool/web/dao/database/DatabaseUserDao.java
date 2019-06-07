@@ -40,6 +40,7 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
         }
     }
 
+
     @Override
     public User findByEmail(String email) throws SQLException {
         if (email == null || "".equals(email)) {
@@ -55,6 +56,18 @@ public final class DatabaseUserDao extends AbstractDao implements UserDao {
             }
         }
         return null;
+    }
+
+    @Override
+    public void addNewUser(String name, String email, String password) throws SQLException {
+        String sql = "INSERT into users(username, email, password, role) VALUES (?,?,?,?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setString(3, password);
+            statement.setBoolean(4, false); //cant register as a professional
+            statement.execute();
+        }
     }
 
     private User fetchUser(ResultSet resultSet) throws SQLException {
