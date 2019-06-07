@@ -33,4 +33,9 @@ public class SimpleUsersService implements UserService {
             throw new ServiceException(ex.getMessage());
         }
     }
+
+    @Override
+    public void addNewUser(String name, String email, String password) throws SQLException, ServiceException {
+        userDao.addNewUser(name, email, password);
+    }
 }
