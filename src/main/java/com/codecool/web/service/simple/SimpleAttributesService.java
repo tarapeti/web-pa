@@ -25,7 +25,7 @@ public class SimpleAttributesService implements AttributesService {
         try {
             return attriburesDao.findbyId(Integer.parseInt(attributeId));
         }  catch (NumberFormatException ex) {
-            throw new ServiceException("Day id must be an integer");
+            throw new ServiceException("attributeId must be an integer");
         } catch (IllegalArgumentException ex) {
             throw new ServiceException(ex.getMessage());
         }
