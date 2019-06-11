@@ -4,6 +4,7 @@ import com.codecool.web.dao.ProductsDao;
 import com.codecool.web.dao.TypesDao;
 import com.codecool.web.dao.database.DatabaseProductsDao;
 import com.codecool.web.dao.database.DatabaseTypesDao;
+import com.codecool.web.dto.ProductsDto;
 import com.codecool.web.model.Product;
 import com.codecool.web.model.Type;
 import com.codecool.web.service.ProductsService;
@@ -28,16 +29,16 @@ public class ProductsServlet extends AbstractServlet {
         try (Connection connection = getConnection(req.getServletContext())) {
             ProductsDao productsDao = new DatabaseProductsDao(connection);
             ProductsService productsService = new SimpleProductsService(productsDao);
+            List<Product> products;
 
-            String productType = req.getParameter("type");
+            String typeId = req.getParameter("typeId"); //nullpointer??
 
-            if (productType.equals(null)) {
-                productsService.getAll();
+            if (typeId.equals(null)){
+                products = productsService.getAll();
             }
+            products = productsService.getProductByTypeId(typeId);
 
-            List<Product> products = productsService.getProductByTypeId(productType);
 
-            sendMessage(resp, HttpServletResponse.SC_OK, products);
         } catch (SQLException e) {
             handleSqlError(resp, e);
         } catch (ServiceException e) {
