@@ -1,9 +1,16 @@
 package com.codecool.web.servlet;
 
 import com.codecool.web.dao.ProductsDao;
+import com.codecool.web.dao.TypesDao;
 import com.codecool.web.dao.database.DatabaseProductsDao;
+import com.codecool.web.dao.database.DatabaseTypesDao;
+import com.codecool.web.model.Product;
+import com.codecool.web.model.Type;
 import com.codecool.web.service.ProductsService;
+import com.codecool.web.service.TypesService;
+import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleProductsService;
+import com.codecool.web.service.simple.SimpleTypesService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/product")
 public class ProductsServlet extends AbstractServlet {
@@ -23,9 +31,17 @@ public class ProductsServlet extends AbstractServlet {
 
             String productType = req.getParameter("type");
 
-            sendMessage(resp, HttpServletResponse.SC_OK, null);
+            if (productType.equals(null)){
+                productsService.getAll();
+            }
+
+            List<Product> products = productsService.getProductByTypeId(productType);
+            
+            sendMessage(resp, HttpServletResponse.SC_OK, products);
         } catch (SQLException e) {
             handleSqlError(resp, e);
+        } catch (ServiceException e) {
+            e.printStackTrace();
         }
     }
 
