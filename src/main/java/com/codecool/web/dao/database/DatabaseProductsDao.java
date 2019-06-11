@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
-    DatabaseProductsDao(Connection connection) {
+    public DatabaseProductsDao(Connection connection) {
         super(connection);
     }
 
@@ -113,6 +113,22 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
             }
             return ascending;
         }
+    }
+
+    @Override
+    public List<Product> findProductByTypeId(int typeId) throws SQLException {
+        String sql = "SELECT * FROM products INNER JOIN types_table tt on products.type_id = tt.id WHERE tt.id= ? AND ";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, typeId);
+            List<Product> products = new ArrayList<>();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    products.add(fetchProduct(resultSet));
+                }
+                return products;
+            }
+        }
+
     }
 
     private Product fetchProduct(ResultSet resultSet) throws SQLException {
