@@ -1,26 +1,15 @@
-function onShopsClicked() {
+function onAllProductsClicked() {
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onShopsResponse);
+    xhr.addEventListener('load', onAllDecksResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'protected/shops');
+    const params = new URLSearchParams();
+    xhr.open('GET', 'product');
     xhr.send();
 }
 
-function onCouponsClicked() {
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onCouponsResponse);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'protected/coupons');
-    xhr.send();
-}
 
 function onProfileLoad(user) {
     clearMessages();
-    showContents(['profile-content', 'logout-content']);
+    showContents(['profile-content', 'topnav']);
 
-    const userEmailSpandEl = document.getElementById('user-email');
-    const userPasswordSpanEl = document.getElementById('user-password');
-
-    userEmailSpandEl.textContent = user.email;
-    userPasswordSpanEl.textContent = user.password;
 }
