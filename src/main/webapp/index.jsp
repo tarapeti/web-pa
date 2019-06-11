@@ -23,9 +23,9 @@
 <body>
 <div id="topnav" class="hidden content">
     <a id="logout-menu-button" class="active" href="javascript:void(0);">Logout</a>
-    <a href="javascript:void(0);" onclick="onListSchedulesClicked();">Schedules</a>
-    <a href="javascript:void(0);" onclick="onListTasksClicked();">Tasks</a>
-    <a href="javascript:void(0);" onclick="onBackToProfileClicked();">Back to profile</a>
+    <a href="javascript:void(0);" onclick="onAllProductsClicked()">All products</a>
+    <a href="javascript:void(0);" onclick="onSignaturesClicked();">Signature kits</a>
+    <a href="javascript:void(0);" onclick="onCartClikced();">Cart</a>
 </div>
 
 <div id="welcome" class="hidden content">
@@ -63,6 +63,11 @@
 <div id="back-to-profile-content" class="hidden content">
     <br>
     <button onclick="onBackToProfileClicked();">Back to profile</button>
+</div>
+
+
+<div id="profile-content" class="hidden content">
+
 </div>
 
 <div id="logout-content" class="hidden content">
