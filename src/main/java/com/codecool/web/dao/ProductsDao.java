@@ -22,5 +22,7 @@ public interface ProductsDao {
 
     Product[] findbyPriceDESC() throws SQLException;
 
+    List<Product> findProductByType(int type) throws SQLException;
+
 
 }
