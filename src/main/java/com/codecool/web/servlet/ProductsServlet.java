@@ -25,13 +25,13 @@ import java.util.List;
 public class ProductsServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())){
+        try (Connection connection = getConnection(req.getServletContext())) {
             ProductsDao productsDao = new DatabaseProductsDao(connection);
             ProductsService productsService = new SimpleProductsService(productsDao);
 
             String productType = req.getParameter("type");
 
-            if (productType.equals(null)){
+            if (productType.equals(null)) {
                 productsService.getAll();
             }
 
@@ -47,7 +47,7 @@ public class ProductsServlet extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())){
+        try (Connection connection = getConnection(req.getServletContext())) {
 
             sendMessage(resp, HttpServletResponse.SC_OK, null);
         } catch (SQLException e) {
@@ -57,7 +57,7 @@ public class ProductsServlet extends AbstractServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())){
+        try (Connection connection = getConnection(req.getServletContext())) {
 
             sendMessage(resp, HttpServletResponse.SC_OK, null);
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class ProductsServlet extends AbstractServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())){
+        try (Connection connection = getConnection(req.getServletContext())) {
 
             sendMessage(resp, HttpServletResponse.SC_OK, null);
         } catch (SQLException e) {
