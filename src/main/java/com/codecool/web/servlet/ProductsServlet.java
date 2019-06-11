@@ -1,5 +1,10 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.dao.ProductsDao;
+import com.codecool.web.dao.database.DatabaseProductsDao;
+import com.codecool.web.service.ProductsService;
+import com.codecool.web.service.simple.SimpleProductsService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +18,10 @@ public class ProductsServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection connection = getConnection(req.getServletContext())){
+            ProductsDao productsDao = new DatabaseProductsDao(connection);
+            ProductsService productsService = new SimpleProductsService(productsDao);
+
+            String productType = req.getParameter("type");
 
             sendMessage(resp, HttpServletResponse.SC_OK, null);
         } catch (SQLException e) {

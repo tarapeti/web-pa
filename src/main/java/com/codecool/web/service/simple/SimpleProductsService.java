@@ -1,10 +1,14 @@
 package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.ProductsDao;
+import com.codecool.web.dao.TypesDao;
+import com.codecool.web.dao.database.DatabaseTypesDao;
 import com.codecool.web.model.Product;
 import com.codecool.web.service.ProductsService;
+import com.codecool.web.service.TypesService;
 import com.codecool.web.service.exception.ServiceException;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -56,4 +60,17 @@ public class SimpleProductsService implements ProductsService {
     public Product[] getbyPriceDESC() throws SQLException, SQLException {
         return productsDao.findbyPriceDESC();
     }
+
+    @Override
+    public List<Product> getProductByTypeName(String type, TypesService typesService) throws SQLException, ServiceException {
+        try {
+            return productsDao.findProductByTypeId(Integer.parseInt(type));
+        }  catch (NumberFormatException ex) {
+            throw new ServiceException("typeId must be an integer");
+        } catch (IllegalArgumentException ex) {
+            throw new ServiceException(ex.getMessage());
+        }
+    }
+
+
 }
