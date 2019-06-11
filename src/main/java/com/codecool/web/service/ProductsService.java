@@ -22,5 +22,7 @@ public interface ProductsService {
 
     Product[] getbyPriceDESC() throws SQLException, SQLException;
 
-    List<Product> getProductByTypeName(String type, TypesService typesService) throws SQLException, ServiceException;
+    List<Product> getProductByTypeId(String type) throws SQLException, ServiceException;
+
+
 }

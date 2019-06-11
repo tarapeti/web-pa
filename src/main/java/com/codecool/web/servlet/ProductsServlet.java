@@ -36,7 +36,7 @@ public class ProductsServlet extends AbstractServlet {
             }
 
             List<Product> products = productsService.getProductByTypeId(productType);
-            
+
             sendMessage(resp, HttpServletResponse.SC_OK, products);
         } catch (SQLException e) {
             handleSqlError(resp, e);

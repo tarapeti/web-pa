@@ -39,7 +39,7 @@ public class SimpleProductsService implements ProductsService {
     public Product getbyId(String prodcutId) throws SQLException, ServiceException {
         try {
             return productsDao.findbyId(Integer.parseInt(prodcutId));
-        }  catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             throw new ServiceException("prodcutId must be an integer");
         } catch (IllegalArgumentException ex) {
             throw new ServiceException(ex.getMessage());
@@ -62,15 +62,13 @@ public class SimpleProductsService implements ProductsService {
     }
 
     @Override
-    public List<Product> getProductByTypeName(String type, TypesService typesService) throws SQLException, ServiceException {
+    public List<Product> getProductByTypeId(String type) throws SQLException, ServiceException {
         try {
             return productsDao.findProductByTypeId(Integer.parseInt(type));
-        }  catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             throw new ServiceException("typeId must be an integer");
         } catch (IllegalArgumentException ex) {
             throw new ServiceException(ex.getMessage());
         }
     }
-
-
 }
