@@ -21,7 +21,7 @@ CREATE TABLE users
 create table types_table
 (
     id   serial primary key,
-    name text
+    typename text
 );
 
 CREATE TABLE products
@@ -95,7 +95,7 @@ VALUES ('user1', 'user1@user1', 'user1', false),
        ('pro1', 'pro1@pro1', 'pro1', true),
        ('pro2', 'pro2@pro2', 'pro2', true);
 
-INSERT INTO types_table(name)
+INSERT INTO types_table(typename)
 VALUES ('deck'),
        ('grip'),
        ('truck'),
