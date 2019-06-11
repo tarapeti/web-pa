@@ -27,7 +27,7 @@ public class DatabaseOrdersDao extends AbstractDao implements OrdersDao {
 
     @Override
     public Order findbyOrderId(int orderId) throws SQLException {
-        String sql = "SELECT * FROM orders where id = ?";
+        String sql = "SELECT * FROM orders where order_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, orderId);
             try (ResultSet resultSet = statement.executeQuery()) {
