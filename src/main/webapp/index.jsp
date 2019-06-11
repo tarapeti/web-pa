@@ -10,12 +10,14 @@
         <c:url value="/register.js" var="registerScriptUrl"/>
         <c:url value="/login.js" var="loginScriptUrl"/>
         <c:url value="/profile.js" var="profileScriptUrl"/>
+        <c:url value="/products.js" var="productsSriptUrl"/>
         <c:url value="/back-to-profile.js" var="backToProfileScriptUrl"/>
         <c:url value="/logout.js" var="logoutScriptUrl"/>
         <link rel="stylesheet" type="text/css" href="${styleUrl}">
         <script src="${indexScriptUrl}"></script>
         <script src="${loginScriptUrl}"></script>
         <script src="${profileScriptUrl}"></script>
+        <script src="${productsSriptUrl}"></script>
         <script src="${backToProfileScriptUrl}"></script>
         <script src="${logoutScriptUrl}"></script>
         <title>SkateShop</title>
