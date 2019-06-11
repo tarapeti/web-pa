@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseTypesDao extends AbstractDao implements TypesDao {
-    DatabaseTypesDao(Connection connection) {
+    public DatabaseTypesDao(Connection connection) {
         super(connection);
     }
 
@@ -41,7 +41,7 @@ public class DatabaseTypesDao extends AbstractDao implements TypesDao {
 
     @Override
     public List<Type> findbyName(String name) throws SQLException {
-        String sql = "SELECT * FROM types_table where name =?";
+        String sql = "SELECT * FROM types_table where typename =?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, name);
             List<Type> types = new ArrayList<>();
