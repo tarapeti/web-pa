@@ -33,12 +33,13 @@ public class ProductsServlet extends AbstractServlet {
 
             String typeId = req.getParameter("typeId"); //nullpointer??
 
-            if (typeId.equals(null)){
+            if (typeId.equals("all")){
                 products = productsService.getAll();
+            }else{
+                products = productsService.getProductByTypeId(typeId);
             }
-            products = productsService.getProductByTypeId(typeId);
 
-
+            sendMessage(resp, HttpServletResponse.SC_OK, products);
         } catch (SQLException e) {
             handleSqlError(resp, e);
         } catch (ServiceException e) {

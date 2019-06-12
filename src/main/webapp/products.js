@@ -1,6 +1,7 @@
 function onAllProductsResponse() {
     if (this.status === OK) {
-        console.log(JSON.parse(this.responseText));
+        let json = JSON.parse(this.responseText);
+        console.log(json);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
