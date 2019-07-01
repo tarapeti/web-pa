@@ -16,3 +16,7 @@ function onProfileLoad(user) {
     showContents(['profile-content', 'topnav']);
 
 }
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}

@@ -30,6 +30,18 @@
     <a href="javascript:void(0);" onclick="onCartClikced();">Cart</a>
 </div>
 
+<div id="product-type-selector" class="hidden content">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+</div>
+
+
 <div id="welcome" class="hidden content">
     <h1>Welcome</h1>
     <h2>Founder:</h2>
