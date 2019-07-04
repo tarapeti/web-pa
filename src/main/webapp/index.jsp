@@ -2,43 +2,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <c:url value="/style.css" var="styleUrl"/>
-        <c:url value="/index.js" var="indexScriptUrl"/>
-        <c:url value="/register.js" var="registerScriptUrl"/>
-        <c:url value="/login.js" var="loginScriptUrl"/>
-        <c:url value="/profile.js" var="profileScriptUrl"/>
-        <c:url value="/products.js" var="productsSriptUrl"/>
-        <c:url value="/back-to-profile.js" var="backToProfileScriptUrl"/>
-        <c:url value="/logout.js" var="logoutScriptUrl"/>
-        <link rel="stylesheet" type="text/css" href="${styleUrl}">
-        <script src="${indexScriptUrl}"></script>
-        <script src="${loginScriptUrl}"></script>
-        <script src="${profileScriptUrl}"></script>
-        <script src="${productsSriptUrl}"></script>
-        <script src="${backToProfileScriptUrl}"></script>
-        <script src="${logoutScriptUrl}"></script>
-        <title>SkateShop</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <c:url value="/style.css" var="styleUrl"/>
+    <c:url value="/index.js" var="indexScriptUrl"/>
+    <c:url value="/register.js" var="registerScriptUrl"/>
+    <c:url value="/login.js" var="loginScriptUrl"/>
+    <c:url value="/profile.js" var="profileScriptUrl"/>
+    <c:url value="/products.js" var="productsSriptUrl"/>
+    <c:url value="/back-to-profile.js" var="backToProfileScriptUrl"/>
+    <c:url value="/logout.js" var="logoutScriptUrl"/>
+    <link rel="stylesheet" type="text/css" href="${styleUrl}">
+    <script src="${indexScriptUrl}"></script>
+    <script src="${loginScriptUrl}"></script>
+    <script src="${profileScriptUrl}"></script>
+    <script src="${productsSriptUrl}"></script>
+    <script src="${backToProfileScriptUrl}"></script>
+    <script src="${logoutScriptUrl}"></script>
+    <title>SkateShop</title>
+</head>
 <body>
 <div id="topnav" class="hidden content">
     <a id="logout-menu-button" class="active" href="javascript:void(0);">Logout</a>
     <a href="javascript:void(0);" onclick="onAllProductsClicked()">All products</a>
     <a href="javascript:void(0);" onclick="onSignaturesClicked();">Signature kits</a>
     <a href="javascript:void(0);" onclick="onCartClikced();">Cart</a>
-</div>
-
-<div id="product-type-selector" class="hidden content">
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-    </div>
 </div>
 
 
@@ -79,17 +68,22 @@
     <button onclick="onBackToProfileClicked();">Back to profile</button>
 </div>
 
-
 <div id="profile-content" class="hidden content">
 
 </div>
 
 <div id="product-content" class="hidden content">
-
+    <a href="javascript:void(0);" onclick="onAllGripsClicked();">Grips</a><br>
+    <a href="javascript:void(0);" onclick="onAllDecksClicked();">Decks</a><br>
+    <a href="javascript:void(0);" onclick="onAllTrucksClicked();">Trucks</a><br>
+    <a href="javascript:void(0);" onclick="onAllWheelsClicked();">Wheels</a><br>
+    <a href="javascript:void(0);" onclick="onAscendingOrderClicked();">All products ascending order</a><br>
+    <a href="javascript:void(0);" onclick="onDescendingOrederClicked();">All products descending order</a>
 </div>
 
 <div id="logout-content" class="hidden content">
     <button id="logout-button">Logout</button>
+</div>
 
 </body>
 </html>
