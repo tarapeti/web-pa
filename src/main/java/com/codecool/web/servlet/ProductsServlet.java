@@ -31,7 +31,7 @@ public class ProductsServlet extends AbstractServlet {
             ProductsService productsService = new SimpleProductsService(productsDao);
             List<Product> products;
 
-            String typeId = req.getParameter("typeId"); //nullpointer??
+            String typeId = req.getParameter("typeId");
 
             if (typeId.equals("all")){
                 products = productsService.getAll();
@@ -39,7 +39,7 @@ public class ProductsServlet extends AbstractServlet {
                 products = productsService.getProductByTypeId(typeId);
             }
 
-            sendMessage(resp, HttpServletResponse.SC_OK, products);
+            sendMessage(resp, HttpServletResponse.SC_OK, new ProductsDto(products));
         } catch (SQLException e) {
             handleSqlError(resp, e);
         } catch (ServiceException e) {
