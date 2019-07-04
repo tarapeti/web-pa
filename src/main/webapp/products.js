@@ -37,3 +37,51 @@ function generateTable(table, products) {
     return table;
 
 }
+
+function onAllGripsClicked(){
+    const params = new URLSearchParams();
+    const typeId = 2;
+    params.append('typeId', typeId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAllProductsResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'product?' + params.toString());
+    xhr.send();
+}
+
+function onAllDecksClicked() {
+    const params = new URLSearchParams();
+    const typeId = 1;
+    params.append('typeId', typeId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAllProductsResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'product?' + params.toString());
+    xhr.send();
+}
+
+function onAllTrucksClicked() {
+    const params = new URLSearchParams();
+    const typeId = 3;
+    params.append('typeId', typeId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAllProductsResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'product?' + params.toString());
+    xhr.send();
+}
+
+function onAllWheelsClicked() {
+    const params = new URLSearchParams();
+    const typeId = 4;
+    params.append('typeId', typeId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAllProductsResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'product?' + params.toString());
+    xhr.send();
+}
