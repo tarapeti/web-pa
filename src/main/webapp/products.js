@@ -15,7 +15,7 @@ function showTable(products) {
     if (table == null) {
         document.getElementById('product-content').appendChild(generateTable(null, products));
     } else {
-        document.getElementById("product-table").remove();
+        table.remove();
         document.getElementById('product-content').appendChild(generateTable(null, products));
     }
     showContents(['profile-content', 'topnav', 'product-content']);
@@ -125,8 +125,7 @@ function onAllWheelsClicked() {
 function onProductResponse() {
     if (this.status === OK) {
         let product = JSON.parse(this.responseText);
-        console.log(product);
-        displayProduct(product);
+        showProductDetails(product);
         showContents(['profile-content', 'topnav', 'product-display']);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
@@ -134,7 +133,20 @@ function onProductResponse() {
 
 }
 
-function displayProduct(product) {
+function showProductDetails(product) {
+    let table = document.getElementById("display-product-table");
+    if (table == null) {
+        document.getElementById('product-display').appendChild(displayProduct(null, product));
+    } else {
+        table.remove();
+        document.getElementById('product-display').appendChild(displayProduct(null, product));
+    }
+
+}
+
+function displayProduct(table, product) {
+
+    if (!table) table = document.createElement('table');
 
     let productDisplayTable = document.createElement('table');
     productDisplayTable.setAttribute('id', "display-product-table");
@@ -162,4 +174,11 @@ function displayProduct(product) {
 
     document.getElementById('product-display').appendChild(productDisplayTable);
 
+    return productDisplayTable;
+
 }
+
+//kell most vásárlás, localsorage/sessionstorage
+//register, logout fixálni
+//decks valamiért nem mukodik
+//admin page a crudnak?
