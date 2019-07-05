@@ -29,14 +29,46 @@ function generateTable(table, products) {
     table.setAttribute('border', "1px");
 
     for (let i = 0; i < products.length; i++) {
+        localStorage.removeItem("productId");
         let product = products[i];
-        let tableDEl = document.createElement('td');
-        tableDEl.innerHTML = product.name;
+        let a = document.createElement('a');
+        a.href = 'javascript:void(0);';
+        a.addEventListener("click", function(){onProductClicked(product.id)});
+        a.textContent = product.name;
+
+        /*        let tableDEl = document.createElement('td');
+                tableDEl.innerHTML = product.name;
+                tableDEl.addEventListener("click", onProductClicked);*/
         let tableREl = document.createElement('tr');
-        tableREl.appendChild(tableDEl);
+        tableREl.appendChild(a);
         table.appendChild(tableREl);
     }
     return table;
+
+}
+
+function onAllProductsClicked() {
+    const params = new URLSearchParams();
+    const typeId = "all";
+    params.append('typeId', typeId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAllProductsResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'products?' + params.toString());
+    xhr.send();
+}
+
+function onProductClicked(productId) {
+
+    const params = new URLSearchParams();
+    params.append('productId', productId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onProductResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'product?' + params.toString());
+    xhr.send();
 
 }
 
@@ -48,7 +80,7 @@ function onAllGripsClicked(){
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onAllProductsResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'product?' + params.toString());
+    xhr.open('GET', 'products?' + params.toString());
     xhr.send();
 }
 
@@ -72,7 +104,7 @@ function onAllTrucksClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onAllProductsResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'product?' + params.toString());
+    xhr.open('GET', 'products?' + params.toString());
     xhr.send();
 }
 
@@ -84,6 +116,16 @@ function onAllWheelsClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onAllProductsResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'product?' + params.toString());
+    xhr.open('GET', 'products?' + params.toString());
     xhr.send();
+}
+
+function onProductResponse() {
+    if (this.status === OK) {
+        let product = JSON.parse(this.responseText);
+        console.log(product);
+    } else {
+        onOtherResponse(schedulesContentDivEl, this);
+    }
+
 }
