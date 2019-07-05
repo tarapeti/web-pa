@@ -81,6 +81,8 @@
     <a href="javascript:void(0);" onclick="onDescendingOrederClicked();">All products descending order</a>
 </div>
 
+<div id="product-display" class="hidden content"></div>
+
 <div id="logout-content" class="hidden content">
     <button id="logout-button">Logout</button>
 </div>
