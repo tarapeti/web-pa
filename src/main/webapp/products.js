@@ -3,6 +3,8 @@ function onAllProductsResponse() {
         let productDto = JSON.parse(this.responseText);
         let products = productDto.products;
         showTable(products);
+        showContents(['profile-content', 'topnav', 'product-content']);
+        console.log(productDto.products);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
@@ -11,10 +13,10 @@ function onAllProductsResponse() {
 function showTable(products) {
     let table = document.getElementById("product-table");
     if (table == null) {
-        document.getElementById('product-content').appendChild(generateTable(table, products ));
+        document.getElementById('product-content').appendChild(generateTable(null, products ));
     } else {
-        table.remove();
-        document.getElementById('product-content').appendChild(generateTable(table, products ));
+        document.getElementById("product-table").remove();
+        document.getElementById('product-content').appendChild(generateTable(null, products ));
     }
     showContents(['profile-content', 'topnav', 'product-content']);
 }
@@ -29,7 +31,7 @@ function generateTable(table, products) {
     for (let i = 0; i < products.length; i++) {
         let product = products[i];
         let tableDEl = document.createElement('td');
-        tableDEl.innerHTML = product.id;
+        tableDEl.innerHTML = product.name;
         let tableREl = document.createElement('tr');
         tableREl.appendChild(tableDEl);
         table.appendChild(tableREl);
