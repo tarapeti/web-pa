@@ -73,5 +73,6 @@ public class SimpleOrdersService implements OrdersService {
         for(Order order : orders){
             orderDetails.add(ordersDao.findDetailbyOrderId(order.getOrderId()));
         }
+        return orderDetails;
     }
 }
