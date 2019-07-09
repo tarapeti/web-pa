@@ -2,6 +2,7 @@ package com.codecool.web.dao.database;
 
 import com.codecool.web.dao.OrdersDao;
 import com.codecool.web.model.Order;
+import com.codecool.web.model.OrderDetail;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -56,6 +57,21 @@ public class DatabaseOrdersDao extends AbstractDao implements OrdersDao {
         }
     }
 
+    @Override
+    public List<OrderDetail> findDetailbyOrderId(int orderId) throws SQLException {
+        String sql = "SELECT * FROM order_details WHERE order_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, orderId);
+            List<OrderDetail> orderDetails = new ArrayList<>();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    orderDetails.add(fetchOrderDetails(resultSet));
+                }
+                return orderDetails;
+            }
+        }
+    }
+
 
     @Override
     public void order(int userId, int productId, int price, long date) throws SQLException {
@@ -89,5 +105,13 @@ public class DatabaseOrdersDao extends AbstractDao implements OrdersDao {
         int orderId = resultSet.getInt("order_id");
         int customerId = resultSet.getInt("customer_id");
         return new Order(orderId, customerId);
+    }
+
+    private OrderDetail fetchOrderDetails(ResultSet resultSet) throws SQLException{
+        int orderId = resultSet.getInt("order_id");
+        int productId = resultSet.getInt("product_id");
+        int price = resultSet.getInt("price");
+        long date = resultSet.getLong("date");
+        return new OrderDetail(orderId, productId, price, date);
     }
 }
