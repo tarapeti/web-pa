@@ -42,4 +42,15 @@ public class SimpleOrdersService implements OrdersService {
             throw new ServiceException(ex.getMessage());
         }
     }
+
+    @Override
+    public void order(int userId, String productId, int price, long date) throws SQLException, ServiceException {
+        try {
+            ordersDao.order(userId, Integer.parseInt(productId), price, date);
+        }  catch (NumberFormatException ex) {
+            throw new ServiceException("orderId must be an integer");
+        } catch (IllegalArgumentException ex) {
+            throw new ServiceException(ex.getMessage());
+        }
+    }
 }
