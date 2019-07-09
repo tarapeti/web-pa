@@ -4,7 +4,9 @@ import com.codecool.web.dao.OrdersDao;
 import com.codecool.web.dao.ProductsDao;
 import com.codecool.web.dao.database.DatabaseOrdersDao;
 import com.codecool.web.dao.database.DatabaseProductsDao;
+import com.codecool.web.dto.OrderDto;
 import com.codecool.web.model.Order;
+import com.codecool.web.model.OrderDetail;
 import com.codecool.web.model.User;
 import com.codecool.web.service.OrdersService;
 import com.codecool.web.service.ProductsService;
@@ -63,10 +65,11 @@ public class CartServlet extends AbstractServlet {
             int userId = user.getId();
 
             List<Order> orders = ordersService.getbyCustomerId(userId);
+            List<OrderDetail> orderDetails = ordersService.findOrderDetailsForEachOrder(orders);
 
 
 
-            sendMessage(resp, HttpServletResponse.SC_OK, orders);
+            sendMessage(resp, HttpServletResponse.SC_OK, new OrderDto(orders, orderDetails));
         } catch (SQLException e) {
             handleSqlError(resp, e);
 
@@ -76,3 +79,10 @@ public class CartServlet extends AbstractServlet {
         }
     }
 }
+
+//kellene elotte a cart és utána megrendelni??
+//nem serial orderid
+
+//VAGY átneezni cart és cartdetailre és az order nem csinálna igazábol semmit
+//productdetail popupba kéne navigáció egyszerűsítés miatt
+
