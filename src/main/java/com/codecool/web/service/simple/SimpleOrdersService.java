@@ -33,9 +33,9 @@ public class SimpleOrdersService implements OrdersService {
     }
 
     @Override
-    public List<Order> findbyCustomerId(String customerId) throws SQLException, ServiceException {
+    public List<Order> findbyCustomerId(int customerId) throws SQLException, ServiceException {
         try {
-            return ordersDao.findbyCustomerId(Integer.parseInt(customerId));
+            return ordersDao.findbyCustomerId(customerId);
         }  catch (NumberFormatException ex) {
             throw new ServiceException("orderId must be an integer");
         } catch (IllegalArgumentException ex) {
