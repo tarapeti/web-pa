@@ -1,6 +1,7 @@
 package com.codecool.web.dao;
 
 import com.codecool.web.model.Order;
+import com.codecool.web.model.OrderDetail;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -12,6 +13,8 @@ public interface OrdersDao {
     Order findbyOrderId(int orderId) throws SQLException;
 
     List<Order> findbyCustomerId(int customerId) throws SQLException;
+
+    List<OrderDetail> findDetailbyOrderId(int orderId) throws SQLException;
 
     void order(int userId, int productId, int price, long date) throws SQLException;
 }
