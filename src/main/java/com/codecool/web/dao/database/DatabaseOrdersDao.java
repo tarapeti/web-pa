@@ -5,10 +5,11 @@ import com.codecool.web.model.Order;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class DatabaseOrdersDao extends AbstractDao implements OrdersDao {
-    DatabaseOrdersDao(Connection connection) {
+    public DatabaseOrdersDao(Connection connection) {
         super(connection);
     }
 
@@ -39,6 +40,7 @@ public class DatabaseOrdersDao extends AbstractDao implements OrdersDao {
         return null;
     }
 
+
     @Override
     public List<Order> findbyCustomerId(int customerId) throws SQLException {
         String sql = "SELECT * FROM orders WHERE customer_id = ?";
@@ -53,6 +55,35 @@ public class DatabaseOrdersDao extends AbstractDao implements OrdersDao {
             }
         }
     }
+
+
+    @Override
+    public void order(int userId, int productId, int price, long date) throws SQLException {
+        String sql = "INSERT INTO order_details(product_id, price, date) VALUES(?,?,?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setInt(1, productId);
+            statement.setInt(2, price);
+            statement.setLong(3, date);
+            statement.execute();
+
+            try (ResultSet resultSet2 = statement.getGeneratedKeys()) {
+                if (resultSet2.next()) {
+                    int orderId = resultSet2.getInt(1);
+                    String sql2 = "INSERT INTO orders(order_id, customer_id) VALUES(?,?)";
+                    try (PreparedStatement statement2 = connection.prepareStatement(sql2)) {
+                        statement2.setInt(1, orderId);
+                        statement2.setInt(2, userId);
+                        statement2.execute();
+                    }
+
+                } else {
+                    throw new SQLException("Expected 1 result");
+                }
+            }
+        }
+
+    }
+
 
     private Order fetchOrder(ResultSet resultSet) throws SQLException {
         int orderId = resultSet.getInt("order_id");
