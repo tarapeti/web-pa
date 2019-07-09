@@ -3,21 +3,22 @@ package com.codecool.web.dto;
 import com.codecool.web.model.Order;
 import com.codecool.web.model.OrderDetail;
 
+import java.util.List;
+
 public class OrderDto {
-    private final Order order;
-    private final OrderDetail orderDetail;
+    private final List<Order> order;
+    private final List<OrderDetail> orderDetail;
 
-
-    public OrderDto(Order order, OrderDetail orderDetail) {
+    public OrderDto(List<Order> order, List<OrderDetail> orderDetail) {
         this.order = order;
         this.orderDetail = orderDetail;
     }
 
-    public Order getOrder() {
+    public List<Order> getOrder() {
         return order;
     }
 
-    public OrderDetail getOrderDetail() {
+    public List<OrderDetail> getOrderDetail() {
         return orderDetail;
     }
 }
