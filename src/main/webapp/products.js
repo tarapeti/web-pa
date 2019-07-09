@@ -37,13 +37,10 @@ function generateTable(table, products) {
             onProductClicked(product.id)
         });
         a.textContent = product.name;
-
-        /*        let tableDEl = document.createElement('td');
-                tableDEl.innerHTML = product.name;
-                tableDEl.addEventListener("click", onProductClicked);*/
         let tableREl = document.createElement('tr');
         tableREl.appendChild(a);
         table.appendChild(tableREl);
+
     }
     return table;
 
@@ -159,6 +156,7 @@ function displayProduct(table, product) {
 
     let brandTrEl = document.createElement('tr');
     let priceTrEl = document.createElement('tr');
+    let buyTrEl = document.createElement('tr');
 
     let brandTd = document.createElement('td');
     brandTd.innerHTML = brand;
@@ -171,8 +169,16 @@ function displayProduct(table, product) {
     productDisplayTable.appendChild(title);
     productDisplayTable.appendChild(brandTrEl);
     productDisplayTable.appendChild(priceTrEl);
+    productDisplayTable.appendChild(buyTrEl);
+
+
+    var buy = document.createElement('button');
+    buy.innerHTML = "Buy!"
+    buy.onclick = function (){putinCart(product.id)};
+    buyTrEl.appendChild(buy);
 
     document.getElementById('product-display').appendChild(productDisplayTable);
+
 
     return productDisplayTable;
 
