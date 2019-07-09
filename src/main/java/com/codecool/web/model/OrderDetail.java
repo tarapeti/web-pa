@@ -7,14 +7,12 @@ public class OrderDetail {
 
     private final int orderId;
     private final int productId;
-    private final int quantity;
     private final int price;
     private final Date date;
 
-    public OrderDetail(int orderId, int productId, int quantity, int price, Date date) {
+    public OrderDetail(int orderId, int productId, int price, Date date) {
         this.orderId = orderId;
         this.productId = productId;
-        this.quantity = quantity;
         this.price = price;
         this.date = date;
     }
@@ -25,10 +23,6 @@ public class OrderDetail {
 
     public int getProductId() {
         return productId;
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 
     public int getPrice() {
@@ -46,13 +40,12 @@ public class OrderDetail {
         OrderDetail that = (OrderDetail) o;
         return getOrderId() == that.getOrderId() &&
                 getProductId() == that.getProductId() &&
-                getQuantity() == that.getQuantity() &&
                 getPrice() == that.getPrice() &&
                 Objects.equals(getDate(), that.getDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrderId(), getProductId(), getQuantity(), getPrice(), getDate());
+        return Objects.hash(getOrderId(), getProductId(), getPrice(), getDate());
     }
 }
