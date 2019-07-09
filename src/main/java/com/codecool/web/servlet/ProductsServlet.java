@@ -33,9 +33,9 @@ public class ProductsServlet extends AbstractServlet {
 
             String typeId = req.getParameter("typeId");
 
-            if (typeId.equals("all")){
+            if (typeId.equals("all")) {
                 products = productsService.getAll();
-            }else{
+            } else {
                 products = productsService.getProductByTypeId(typeId);
             }
 
