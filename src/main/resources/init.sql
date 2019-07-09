@@ -72,11 +72,10 @@ create table signatures
 
 create table order_details
 (
-    order_id   int primary key,
+    order_id   SERIAL primary key,
     product_id int,
-    quantity   int,
     price      int,
-    date       date,
+    date       bigint,
     foreign key (product_id) references products (id)
 
 );
