@@ -58,18 +58,17 @@ public class DatabaseOrdersDao extends AbstractDao implements OrdersDao {
     }
 
     @Override
-    public List<OrderDetail> findDetailbyOrderId(int orderId) throws SQLException {
+    public OrderDetail findDetailbyOrderId(int orderId) throws SQLException {
         String sql = "SELECT * FROM order_details WHERE order_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, orderId);
-            List<OrderDetail> orderDetails = new ArrayList<>();
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    orderDetails.add(fetchOrderDetails(resultSet));
+                if (resultSet.next()) {
+                    return fetchOrderDetails(resultSet);
                 }
-                return orderDetails;
             }
         }
+        return null;
     }
 
 

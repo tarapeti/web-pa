@@ -14,7 +14,7 @@ public interface OrdersDao {
 
     List<Order> findbyCustomerId(int customerId) throws SQLException;
 
-    List<OrderDetail> findDetailbyOrderId(int orderId) throws SQLException;
+    OrderDetail findDetailbyOrderId(int orderId) throws SQLException;
 
     void order(int userId, int productId, int price, long date) throws SQLException;
 }

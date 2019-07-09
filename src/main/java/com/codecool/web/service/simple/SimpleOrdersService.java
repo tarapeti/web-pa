@@ -7,6 +7,7 @@ import com.codecool.web.service.OrdersService;
 import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleOrdersService implements OrdersService {
@@ -45,7 +46,7 @@ public class SimpleOrdersService implements OrdersService {
     }
 
     @Override
-    public List<OrderDetail> getDetailbyOrderId(int orderId) throws SQLException, ServiceException {
+    public OrderDetail getDetailbyOrderId(int orderId) throws SQLException, ServiceException {
         try {
             return ordersDao.findDetailbyOrderId(orderId);
         }  catch (NumberFormatException ex) {
@@ -63,6 +64,14 @@ public class SimpleOrdersService implements OrdersService {
             throw new ServiceException("orderId must be an integer");
         } catch (IllegalArgumentException ex) {
             throw new ServiceException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<OrderDetail> findOrderDetailsForEachOrder(List<Order> orders) throws SQLException {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        for(Order order : orders){
+            orderDetails.add(ordersDao.findDetailbyOrderId(order.getOrderId()));
         }
     }
 }

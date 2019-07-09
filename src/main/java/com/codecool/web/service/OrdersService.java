@@ -15,8 +15,10 @@ public interface OrdersService {
 
     List<Order> getbyCustomerId(int customerId) throws SQLException, ServiceException;
 
-    List<OrderDetail> getDetailbyOrderId(int orderId) throws SQLException, ServiceException;
+    OrderDetail getDetailbyOrderId(int orderId) throws SQLException, ServiceException;
 
     void order(int userId, String productId, int price, long date) throws SQLException, ServiceException;
+
+    List<OrderDetail> findOrderDetailsForEachOrder(List<Order> orders) throws SQLException;
 
 }
