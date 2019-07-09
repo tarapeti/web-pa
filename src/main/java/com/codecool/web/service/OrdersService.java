@@ -13,4 +13,7 @@ public interface OrdersService {
     Order findbyOrderId(String orderId) throws SQLException, ServiceException;
 
     List<Order> findbyCustomerId(String customerId) throws SQLException, ServiceException;
+
+    void order(int userId, String productId, int price, long date) throws SQLException, ServiceException;
+
 }
