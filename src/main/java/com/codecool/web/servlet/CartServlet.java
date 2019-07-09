@@ -62,7 +62,9 @@ public class CartServlet extends AbstractServlet {
             User user = (User) req.getSession().getAttribute("user");
             int userId = user.getId();
 
-            List<Order> orders = ordersService.findbyCustomerId(userId);
+            List<Order> orders = ordersService.getbyCustomerId(userId);
+
+
 
             sendMessage(resp, HttpServletResponse.SC_OK, orders);
         } catch (SQLException e) {
