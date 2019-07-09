@@ -12,10 +12,33 @@ function putinCart(productId) {
 
 function putinCartResponse() {
     if (this.status === OK) {
-        alert("Item put into cart")
+        alert("Item put into cart");
         showContents(['profile-content', 'topnav', 'product-display']);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
+}
+
+function onCartClikced(){
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onCartClikcedResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'cart?');
+    xhr.send();
+
+}
+function onCartClikcedResponse() {
+    if (this.status === OK) {
+        let orders = JSON.parse(this.responseText);
+        console.log(orders);
+        displayOrdersForUser(orders);
+        showContents(['profile-content', 'topnav', 'product-display']);
+    } else {
+        onOtherResponse(schedulesContentDivEl, this);
+    }
+}
+
+function displayOrdersForUser(orders) {
+
 
 }
