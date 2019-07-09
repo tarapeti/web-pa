@@ -2,6 +2,7 @@ package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.OrdersDao;
 import com.codecool.web.model.Order;
+import com.codecool.web.model.OrderDetail;
 import com.codecool.web.service.OrdersService;
 import com.codecool.web.service.exception.ServiceException;
 
@@ -22,7 +23,7 @@ public class SimpleOrdersService implements OrdersService {
     }
 
     @Override
-    public Order findbyOrderId(String orderId) throws SQLException, ServiceException {
+    public Order getbyOrderId(String orderId) throws SQLException, ServiceException {
         try {
             return ordersDao.findbyOrderId(Integer.parseInt(orderId));
         }  catch (NumberFormatException ex) {
@@ -33,9 +34,20 @@ public class SimpleOrdersService implements OrdersService {
     }
 
     @Override
-    public List<Order> findbyCustomerId(int customerId) throws SQLException, ServiceException {
+    public List<Order> getbyCustomerId(int customerId) throws SQLException, ServiceException {
         try {
             return ordersDao.findbyCustomerId(customerId);
+        }  catch (NumberFormatException ex) {
+            throw new ServiceException("orderId must be an integer");
+        } catch (IllegalArgumentException ex) {
+            throw new ServiceException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<OrderDetail> getDetailbyOrderId(int orderId) throws SQLException, ServiceException {
+        try {
+            return ordersDao.findDetailbyOrderId(orderId);
         }  catch (NumberFormatException ex) {
             throw new ServiceException("orderId must be an integer");
         } catch (IllegalArgumentException ex) {
