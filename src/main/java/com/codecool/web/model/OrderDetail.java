@@ -8,9 +8,9 @@ public class OrderDetail {
     private final int orderId;
     private final int productId;
     private final int price;
-    private final Date date;
+    private final long date;
 
-    public OrderDetail(int orderId, int productId, int price, Date date) {
+    public OrderDetail(int orderId, int productId, int price, long date) {
         this.orderId = orderId;
         this.productId = productId;
         this.price = price;
@@ -29,7 +29,7 @@ public class OrderDetail {
         return price;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
