@@ -85,6 +85,8 @@
 
 <div id="product-display" class="hidden content"></div>
 
+<div id="cart-display" class="hidden content"></div>
+
 <div id="logout-content" class="hidden content">
     <button id="logout-button">Logout</button>
 </div>
