@@ -4,7 +4,6 @@ function onAllProductsResponse() {
         let products = productDto.products;
         showTable(products);
         showContents(['profile-content', 'topnav', 'product-content']);
-        console.log(productDto.products);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
