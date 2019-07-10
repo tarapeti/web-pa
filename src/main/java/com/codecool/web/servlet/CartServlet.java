@@ -5,8 +5,10 @@ import com.codecool.web.dao.ProductsDao;
 import com.codecool.web.dao.database.DatabaseOrdersDao;
 import com.codecool.web.dao.database.DatabaseProductsDao;
 import com.codecool.web.dto.OrderDto;
+import com.codecool.web.dto.ProductsDto;
 import com.codecool.web.model.Order;
 import com.codecool.web.model.OrderDetail;
+import com.codecool.web.model.Product;
 import com.codecool.web.model.User;
 import com.codecool.web.service.OrdersService;
 import com.codecool.web.service.ProductsService;
@@ -23,57 +25,34 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/cart")
 public class CartServlet extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())) {
-            OrdersDao ordersDao = new DatabaseOrdersDao(connection);
-            OrdersService ordersService = new SimpleOrdersService(ordersDao);
 
-            ProductsDao productsDao = new DatabaseProductsDao(connection);
-            ProductsService productsService = new SimpleProductsService(productsDao);
-
-            String productId = req.getParameter("productId");
-
-            User user = (User) req.getSession().getAttribute("user");
-            int userId = user.getId();
-
-            long currentTimeMillis = System.currentTimeMillis();
-
-            int price = productsService.getbyId(productId).getPrice();
-
-            ordersService.order(userId, productId, price, currentTimeMillis);
-
-            sendMessage(resp, HttpServletResponse.SC_OK, null);
-        } catch (SQLException e) {
-            handleSqlError(resp, e);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection connection = getConnection(req.getServletContext())) {
-            OrdersDao ordersDao = new DatabaseOrdersDao(connection);
-            OrdersService ordersService = new SimpleOrdersService(ordersDao);
+            ProductsDao productsDao = new DatabaseProductsDao(connection);
+            ProductsService productsService = new SimpleProductsService(productsDao);
 
-            User user = (User) req.getSession().getAttribute("user");
-            int userId = user.getId();
+            String productIds = req.getParameter("productIds");
+            String[] prodIds = productIds.split(",");
 
-            List<Order> orders = ordersService.getbyCustomerId(userId);
-            List<OrderDetail> orderDetails = ordersService.findOrderDetailsForEachOrder(orders);
+            List<Product> porductsInCart = new ArrayList<>();
+            for (int i = 0; i < prodIds.length ; i++) {
+                porductsInCart.add(productsService.getbyId(prodIds[i]));
 
+            }
 
-
-            sendMessage(resp, HttpServletResponse.SC_OK, new OrderDto(orders, orderDetails));
+            sendMessage(resp, HttpServletResponse.SC_OK, new ProductsDto(porductsInCart));
         } catch (SQLException e) {
-            handleSqlError(resp, e);
-
-
+            e.printStackTrace();
         } catch (ServiceException e) {
             e.printStackTrace();
         }
