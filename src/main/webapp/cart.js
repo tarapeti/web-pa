@@ -22,15 +22,33 @@ function onCartClikced(){
 }
 function onCartClikcedResponse() {
     if (this.status === OK) {
+        let emptyCart = document.createElement('p');
+        emptyCart.setAttribute('id', 'empty');
+        emptyCart.textContent = "The cart is emptpy";
+        let empty = document.getElementById('empty');
         try{
-            let json = JSON.parse(this.responseText);
-            let cartItems = json.products;
-            console.log(cartItems);
-            displayCart(cartItems);
+            if(empty == null){
+                let json = JSON.parse(this.responseText);
+                let cartItems = json.products;
+                displayCart(cartItems);
+            }else{
+                empty.remove();
+            }
         }catch (e) {
-            let emptyCart = document.createElement('p');
-            emptyCart.textContent = "The cart is emptpy";
-            document.getElementById('cart-display').appendChild(emptyCart);
+            let table = document.getElementById("cart-table");
+            let coButton = document.getElementById("checkOutButton");
+            if (table == null){
+                if (empty == null){
+                    document.getElementById('cart-display').appendChild(emptyCart);
+                } else{
+                    empty.remove();
+                    document.getElementById('cart-display').appendChild(emptyCart);
+                }
+                document.getElementById('cart-display').appendChild(emptyCart);
+            }else{
+                table.remove();
+                coButton.remove();
+            }
         }finally {
             showContents(['profile-content', 'topnav', 'cart-display']);
 
@@ -49,6 +67,7 @@ function displayCart(cartItems)  {
         document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
     }
     let checkOutButton = document.createElement('button');
+    checkOutButton.setAttribute('id', 'checkOutButton')
     checkOutButton.addEventListener("click", function () {checkOut(cartItems)});
     checkOutButton.innerHTML = "Check out";
     document.getElementById('cart-display').appendChild(checkOutButton);
@@ -56,7 +75,6 @@ function displayCart(cartItems)  {
 
 
 function generateSimpleTable(table, cartItems) {
-    console.log(cartItems);
     if (!table) table = document.createElement('table');
 
     table.setAttribute('id', "cart-table");
