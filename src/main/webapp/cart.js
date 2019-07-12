@@ -25,18 +25,21 @@ function onCartClikcedResponse() {
         let emptyCart = document.createElement('p');
         emptyCart.setAttribute('id', 'empty');
         emptyCart.textContent = "The cart is emptpy";
-        let empty = document.getElementById('empty');
+        let coButton = document.getElementById("checkOutButton");
         try{
-            if(empty == null){
+            if(document.getElementById('empty') == null){
                 let json = JSON.parse(this.responseText);
                 let cartItems = json.products;
+                console.log(cartItems);
                 displayCart(cartItems);
             }else{
-                empty.remove();
+                emptyCart.remove();
+                coButton.remove();
+
             }
         }catch (e) {
+            let empty = document.getElementById('empty');
             let table = document.getElementById("cart-table");
-            let coButton = document.getElementById("checkOutButton");
             if (table == null){
                 if (empty == null){
                     document.getElementById('cart-display').appendChild(emptyCart);
@@ -75,6 +78,7 @@ function displayCart(cartItems)  {
 
 
 function generateSimpleTable(table, cartItems) {
+    console.log(cartItems);
     if (!table) table = document.createElement('table');
 
     table.setAttribute('id', "cart-table");
