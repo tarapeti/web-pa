@@ -22,37 +22,41 @@ function onCartClikced(){
 }
 function onCartClikcedResponse() {
     if (this.status === OK) {
-        let cartItems = JSON.parse(this.responseText);
-        console.log(cartItems);
-        displayCart(cartItems);
-        showContents(['profile-content', 'topnav', 'cart-display']);
+        try{
+            let json = JSON.parse(this.responseText);
+            let cartItems = json.products;
+            console.log(cartItems);
+            displayCart(cartItems);
+        }catch (e) {
+            let emptyCart = document.createElement('p');
+            emptyCart.textContent = "The cart is emptpy";
+            document.getElementById('cart-display').appendChild(emptyCart);
+        }finally {
+            showContents(['profile-content', 'topnav', 'cart-display']);
+
+        }
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
 }
 
 function displayCart(cartItems)  {
-    if (cartItems = null){
-        let emptlyCart = document.createElement('p');
-        emptlyCart.textContent = "The cart is emptpy";
-        document.getElementById('cart-display').appendChild(emptlyCart);
-    }else{
-        let table = document.getElementById("cart-table");
-        if (table == null) {
-            document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
-        } else {
-            table.remove();
-            document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
-        }
-        let checkOutButton = document.createElement('button');
-        checkOutButton.addEventListener("click", function () {checkOut(cartItems)});
-        checkOutButton.innerHTML = "Check out";
-        document.getElementById('cart-display').appendChild(checkOutButton);
+    let table = document.getElementById("cart-table");
+    if (table == null) {
+        document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
+    } else {
+        table.remove();
+        document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
     }
+    let checkOutButton = document.createElement('button');
+    checkOutButton.addEventListener("click", function () {checkOut(cartItems)});
+    checkOutButton.innerHTML = "Check out";
+    document.getElementById('cart-display').appendChild(checkOutButton);
 }
 
 
 function generateSimpleTable(table, cartItems) {
+    console.log(cartItems);
     if (!table) table = document.createElement('table');
 
     table.setAttribute('id', "cart-table");
