@@ -14,6 +14,7 @@
     <c:url value="/back-to-profile.js" var="backToProfileScriptUrl"/>
     <c:url value="/logout.js" var="logoutScriptUrl"/>
     <c:url value="/cart.js" var="cartScriptUrl"/>
+    <c:url value="/order.js" var="orderScriptUrl"/>
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
     <script src="${indexScriptUrl}"></script>
     <script src="${loginScriptUrl}"></script>
@@ -22,6 +23,7 @@
     <script src="${backToProfileScriptUrl}"></script>
     <script src="${logoutScriptUrl}"></script>
     <script src="${cartScriptUrl}"></script>
+    <script src="${orderScriptUrl}"></script>
     <title>SkateShop</title>
 </head>
 <body>
