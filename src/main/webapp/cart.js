@@ -1,17 +1,6 @@
 function putinCart(productId) {
     sessionStorage.setItem(productId, productId);
     putinCartResponse();
-
-
-/*    const params = new URLSearchParams();
-    params.append('productId', productId);
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', putinCartResponse);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'cart?' + params.toString());
-    xhr.send();*/
-
 }
 
 function putinCartResponse() {
@@ -35,7 +24,7 @@ function onCartClikcedResponse() {
     if (this.status === OK) {
         let cartItems = JSON.parse(this.responseText);
         console.log(cartItems);
-        displayCart(cartItems.products);
+        displayCart(cartItems);
         showContents(['profile-content', 'topnav', 'cart-display']);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
@@ -43,14 +32,26 @@ function onCartClikcedResponse() {
 }
 
 function displayCart(cartItems)  {
-    let table = document.getElementById("cart-table");
-    if (table == null) {
-        document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
-    } else {
-        table.remove();
-        document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
+    if (cartItems = null){
+        let emptlyCart = document.createElement('p');
+        emptlyCart.textContent = "The cart is emptpy";
+        document.getElementById('cart-display').appendChild(emptlyCart);
+    }else{
+        let table = document.getElementById("cart-table");
+        if (table == null) {
+            document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
+        } else {
+            table.remove();
+            document.getElementById('cart-display').appendChild(generateSimpleTable(null, cartItems));
+        }
+        let checkOutButton = document.createElement('button');
+        checkOutButton.addEventListener("click", function () {checkOut(cartItems)});
+        checkOutButton.innerHTML = "Check out";
+        document.getElementById('cart-display').appendChild(checkOutButton);
     }
 }
+
+
 function generateSimpleTable(table, cartItems) {
     if (!table) table = document.createElement('table');
 
@@ -65,7 +66,9 @@ function generateSimpleTable(table, cartItems) {
 
         let price = document.createElement('p');
         price.textContent = product.price;
-        let priceTrEl = document.createElement('tr');
+        let priceTrEl = document.createElement('td');
+
+        //remove from cart
 
         priceTrEl.appendChild(price);
         tableREl.appendChild(name);
@@ -76,3 +79,4 @@ function generateSimpleTable(table, cartItems) {
     return table;
 
 }
+
