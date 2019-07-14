@@ -45,6 +45,40 @@ function generateTable(table, products) {
 
 }
 
+function onAscendingOrderClicked() {
+    const params = new URLSearchParams();
+    const ordering = "asc";
+    params.append('ordering', ordering);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', OnOrderingResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'products?' + params.toString());
+    xhr.send();
+}
+
+function onDescendingOrederClicked() {
+    const params = new URLSearchParams();
+    const ordering = "desc";
+    params.append('ordering', ordering);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', OnOrderingResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'products?' + params.toString());
+    xhr.send();
+}
+
+function OnOrderingResponse() {
+    if (this.status === OK) {
+        let products = (JSON.parse(this.responseText));
+        showTable(products);
+        showContents(['profile-content', 'topnav', 'product-content']);
+    } else {
+        onOtherResponse(schedulesContentDivEl, this);
+    }
+}
+
 function onAllProductsClicked() {
     const params = new URLSearchParams();
     const typeId = "all";
