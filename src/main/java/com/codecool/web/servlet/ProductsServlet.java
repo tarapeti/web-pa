@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -50,8 +51,19 @@ public class ProductsServlet extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection connection = getConnection(req.getServletContext())) {
+            ProductsDao productsDao = new DatabaseProductsDao(connection);
+            ProductsService productsService = new SimpleProductsService(productsDao);
+            Product[] products;
 
-            sendMessage(resp, HttpServletResponse.SC_OK, null);
+            String ordering = req.getParameter("ordering");
+
+            if (ordering.equals("asc")){
+                products = productsService.getbyPriceASC();
+            } else {
+                products = productsService.getbyPriceDESC();
+            }
+
+            sendMessage(resp, HttpServletResponse.SC_OK, products);
         } catch (SQLException e) {
             handleSqlError(resp, e);
         }
