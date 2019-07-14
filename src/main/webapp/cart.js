@@ -20,13 +20,14 @@ function onCartClikced(){
     xhr.send();
 
 }
+//gusztustalan
 function onCartClikcedResponse() {
     if (this.status === OK) {
         let emptyCart = document.createElement('p');
         emptyCart.setAttribute('id', 'empty');
         emptyCart.textContent = "The cart is emptpy";
         let coButton = document.getElementById("checkOutButton");
-        try{
+        try{//ha a json null, tehát a dto üres, szervleten is meg lehetett vona oldani kb
             if(document.getElementById('empty') == null){
                 let json = JSON.parse(this.responseText);
                 let cartItems = json.products;
@@ -35,7 +36,6 @@ function onCartClikcedResponse() {
             }else{
                 emptyCart.remove();
                 coButton.remove();
-
             }
         }catch (e) {
             let empty = document.getElementById('empty');
