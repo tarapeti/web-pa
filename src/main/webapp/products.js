@@ -45,6 +45,15 @@ function generateTable(table, products) {
 
 }
 
+function onSignaturesClicked() {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onSignaturesResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'signature?');
+    xhr.send();
+
+}
+
 function onAscendingOrderClicked() {
     const params = new URLSearchParams();
     const ordering = "asc";
