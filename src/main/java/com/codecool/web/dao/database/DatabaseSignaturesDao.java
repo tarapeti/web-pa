@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseSignaturesDao extends AbstractDao implements SignaturesDao {
-    DatabaseSignaturesDao(Connection connection) {
+    public DatabaseSignaturesDao(Connection connection) {
         super(connection);
     }
 
