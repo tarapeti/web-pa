@@ -24,7 +24,7 @@
     <script src="${logoutScriptUrl}"></script>
     <script src="${cartScriptUrl}"></script>
     <script src="${orderScriptUrl}"></script>
-    <title>SkateShop</title>
+    <title>Sk8Shop</title>
 </head>
 <body>
 <div id="topnav" class="hidden content">
