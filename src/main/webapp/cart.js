@@ -20,7 +20,7 @@ function onCartClikced(){
     xhr.send();
 
 }
-//gusztustalan
+//gusztustalan és nemjo
 function onCartClikcedResponse() {
     if (this.status === OK) {
         let emptyCart = document.createElement('p');
@@ -45,9 +45,10 @@ function onCartClikcedResponse() {
                     document.getElementById('cart-display').appendChild(emptyCart);
                 } else{
                     empty.remove();
+                    coButton.remove();
                     document.getElementById('cart-display').appendChild(emptyCart);
                 }
-                document.getElementById('cart-display').appendChild(emptyCart);
+                //document.getElementById('cart-display').appendChild(emptyCart);
             }else{
                 table.remove();
                 coButton.remove();
@@ -94,15 +95,27 @@ function generateSimpleTable(table, cartItems) {
         price.textContent = product.price;
         let priceTrEl = document.createElement('td');
 
+        let removeFromCartEl = document.createElement("button");
+        removeFromCartEl.textContent = "Remove from cart";
+        removeFromCartEl.addEventListener("click", function () {removeFromCart(product.id)});
+        let buttonTEl = document.createElement('td');
+        buttonTEl.appendChild(removeFromCartEl);
         //remove from cart
 
         priceTrEl.appendChild(price);
         tableREl.appendChild(name);
         table.appendChild(tableREl);
         table.appendChild(priceTrEl);
+        table.appendChild(buttonTEl);
 
     }
     return table;
 
+}
+
+function removeFromCart(productId) {
+    alert("item removed from cart");
+    sessionStorage.removeItem(productId);
+    showContents(['profile-content', 'topnav', 'cart-display']);
 }
 
