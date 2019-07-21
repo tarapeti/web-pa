@@ -13,5 +13,7 @@ public interface UserDao {
 
     List<User> findbyRole(boolean role) throws SQLException;
 
+    User findById(int id) throws SQLException;
+
     void addNewUser(String name, String email, String password) throws SQLException;
 }
