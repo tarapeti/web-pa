@@ -126,9 +126,9 @@ public class SimpleSignaturesService implements SignaturesService {
 
     @Override
     public SignaturesDto replaceIdsWithNames(List<Signature> signatures, UserService userService, ProductsService productsService) throws SQLException, ServiceException {
-        List<String> names = new ArrayList<>();
         List<List<String>> all = new ArrayList<>();
         for (Signature signature : signatures) {
+            List<String> names = new ArrayList<>();
             names.add(productsService.getbyId(signature.getDeckId()).getName());
             names.add(productsService.getbyId(signature.getGripId()).getName());
             names.add(productsService.getbyId(signature.getTruckId()).getName());
