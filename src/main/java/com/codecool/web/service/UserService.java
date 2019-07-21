@@ -13,5 +13,7 @@ public interface UserService {
 
     List<User> getbyRole(String role) throws SQLException, ServiceException;
 
+    User getbyId(int userId) throws SQLException, ServiceException;
+
     void addNewUser(String name, String email, String password) throws SQLException, ServiceException;
 }
