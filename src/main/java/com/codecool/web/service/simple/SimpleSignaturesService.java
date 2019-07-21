@@ -1,12 +1,16 @@
 package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.SignaturesDao;
+import com.codecool.web.dto.SignaturesDto;
 import com.codecool.web.model.Product;
 import com.codecool.web.model.Signature;
+import com.codecool.web.service.ProductsService;
 import com.codecool.web.service.SignaturesService;
+import com.codecool.web.service.UserService;
 import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleSignaturesService implements SignaturesService {
@@ -118,5 +122,20 @@ public class SimpleSignaturesService implements SignaturesService {
         } catch (IllegalArgumentException ex) {
             throw new ServiceException(ex.getMessage());
         }
+    }
+
+    @Override
+    public SignaturesDto replaceIdsWithNames(List<Signature> signatures, UserService userService, ProductsService productsService) throws SQLException, ServiceException {
+        List<String> names = new ArrayList<>();
+        List<List<String>> all = new ArrayList<>();
+        for (Signature signature : signatures) {
+            names.add(productsService.getbyId(signature.getDeckId()).getName());
+            names.add(productsService.getbyId(signature.getGripId()).getName());
+            names.add(productsService.getbyId(signature.getTruckId()).getName());
+            names.add(productsService.getbyId(signature.getWheelId()).getName());
+            names.add(userService.getbyId( signature.getProId()).getUsername());
+            all.add(names);
+        }
+        return new SignaturesDto(all);
     }
 }
