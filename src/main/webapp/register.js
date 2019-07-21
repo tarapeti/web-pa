@@ -16,7 +16,7 @@ function onRegisterButtonClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onRegisterResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'regiester');
+    xhr.open('POST', 'register');
     xhr.send(params);
 }
 
@@ -26,4 +26,9 @@ function onRegisterResponse() {
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
+}
+
+function showRegisterDiv() {
+    showContents(['reg-content']);
+
 }

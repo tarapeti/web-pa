@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
     <script src="${indexScriptUrl}"></script>
     <script src="${loginScriptUrl}"></script>
+    <script src="${registerScriptUrl}"></script>
     <script src="${profileScriptUrl}"></script>
     <script src="${productsSriptUrl}"></script>
     <script src="${backToProfileScriptUrl}"></script>
@@ -52,7 +53,6 @@
         <br>
         Password: <input type="password" name="password" required placeholder="*****">
         <br>
-        Role:
         <button id="reg-button" onclick="onRegisterButtonClicked()">Register</button>
     </form>
 </div>
