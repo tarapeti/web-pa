@@ -1,5 +1,6 @@
 package com.codecool.web.service;
 
+import com.codecool.web.dto.SignaturesDto;
 import com.codecool.web.model.Product;
 import com.codecool.web.model.Signature;
 import com.codecool.web.service.exception.ServiceException;
@@ -27,4 +28,6 @@ public interface SignaturesService {
     Signature getbyGripId(String gripId) throws SQLException, ServiceException;
 
     Signature getbyWheelId(String wheelId) throws SQLException, ServiceException;
+
+    SignaturesDto replaceIdsWithNames(List<Signature> signatures, UserService userService, ProductsService productsService) throws SQLException, ServiceException;
 }
