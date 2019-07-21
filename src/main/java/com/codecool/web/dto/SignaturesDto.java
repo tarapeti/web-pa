@@ -5,13 +5,13 @@ import com.codecool.web.model.Signature;
 import java.util.List;
 
 public class SignaturesDto {
-    private final List<Signature> signatures;
+    private List<List<String>> allNames;
 
-    public SignaturesDto(List<Signature> signatures) {
-        this.signatures = signatures;
+    public SignaturesDto(List<List<String>> allNames) {
+        this.allNames = allNames;
     }
 
-    public List<Signature> getSignatures() {
-        return signatures;
+    public List<List<String>> getAllNames() {
+        return allNames;
     }
 }
