@@ -71,7 +71,7 @@ public class OrderServlet extends AbstractServlet {
             String[] prodIds = productIds.split(",");
 
             for (int i = 0; i < prodIds.length ; i++) {
-                int price = productsService.getbyId(prodIds[i]).getPrice();
+                int price = productsService.getbyId(Integer.parseInt(prodIds[i])).getPrice();
                 ordersService.order(userId, prodIds[i], price, currentTimeMillis);
             }
 

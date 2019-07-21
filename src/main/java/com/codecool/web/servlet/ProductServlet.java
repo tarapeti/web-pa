@@ -27,7 +27,7 @@ public class ProductServlet extends AbstractServlet {
 
             String productId = req.getParameter("productId");
 
-            Product product = productsService.getbyId(productId);
+            Product product = productsService.getbyId(Integer.parseInt(productId));
 
             sendMessage(resp, HttpServletResponse.SC_OK, product);
         } catch (SQLException e) {

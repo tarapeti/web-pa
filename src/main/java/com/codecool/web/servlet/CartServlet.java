@@ -46,7 +46,7 @@ public class CartServlet extends AbstractServlet {
 
             List<Product> porductsInCart = new ArrayList<>();
             for (int i = 0; i < prodIds.length ; i++) {
-                porductsInCart.add(productsService.getbyId(prodIds[i]));
+                porductsInCart.add(productsService.getbyId(Integer.parseInt(prodIds[i])));
 
             }
 
