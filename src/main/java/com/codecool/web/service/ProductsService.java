@@ -14,7 +14,7 @@ public interface ProductsService {
 
     List<Product> getbyBrand(String brand) throws SQLException, SQLException;
 
-    Product getbyId(String prodcutId) throws SQLException, SQLException, ServiceException;
+    Product getbyId(int prodcutId) throws SQLException, SQLException, ServiceException;
 
     int countAllProducts() throws SQLException, SQLException;
 
