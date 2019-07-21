@@ -35,6 +35,11 @@ public class SimpleUsersService implements UserService {
     }
 
     @Override
+    public User getbyId(int userId) throws SQLException, ServiceException {
+        return userDao.findById(userId);
+    }
+
+    @Override
     public void addNewUser(String name, String email, String password) throws SQLException, ServiceException {
         userDao.addNewUser(name, email, password);
     }
