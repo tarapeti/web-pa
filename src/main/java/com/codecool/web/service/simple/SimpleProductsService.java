@@ -36,9 +36,9 @@ public class SimpleProductsService implements ProductsService {
     }
 
     @Override
-    public Product getbyId(String prodcutId) throws SQLException, ServiceException {
+    public Product getbyId(int prodcutId) throws SQLException, ServiceException {
         try {
-            return productsDao.findbyId(Integer.parseInt(prodcutId));
+            return productsDao.findbyId((prodcutId));
         } catch (NumberFormatException ex) {
             throw new ServiceException("prodcutId must be an integer");
         } catch (IllegalArgumentException ex) {
