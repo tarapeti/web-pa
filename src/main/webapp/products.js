@@ -5,7 +5,7 @@ function onAllProductsResponse() {
         showTable(products);
         showContents(['profile-content', 'topnav', 'product-content']);
     } else {
-        onOtherResponse(schedulesContentDivEl, this);
+        alert("Some error occured try again")
     }
 }
 
@@ -54,6 +54,42 @@ function onSignaturesClicked() {
 
 }
 
+function onSignaturesResponse() {
+    if (this.status === OK) {
+        let signaturesDto = JSON.parse(this.responseText);
+        document.getElementById('signature-display').appendChild(showSignatures(null, signaturesDto.allNames));
+        showContents(['signature-display', 'topnav', 'profile-content']);
+    } else {
+        alert("Some error occured try again");
+    }
+
+}
+
+function showSignatures(table, signatures) {
+
+    if (!table) table = document.createElement('table');
+
+    table.setAttribute('id', "signature-table");
+    table.setAttribute('border', "1px");
+
+    let tableREl = document.createElement('tr');
+
+    for (let i = 0; i < signatures.length; i++) {
+        let signature = signatures[i];
+        let tableDEl = document.createElement('td');
+        for (let j = 0; j < signature.length ; j++) {
+            let p = document.createElement('p');
+            p.textContent = signature[j];
+            tableDEl.appendChild(p);
+            console.log(signature[j]);
+        }
+        tableREl.appendChild(tableDEl);
+        table.appendChild(tableREl);
+
+    }
+    return table;
+}
+
 function onAscendingOrderClicked() {
     const params = new URLSearchParams();
     const ordering = "asc";
@@ -84,7 +120,7 @@ function OnOrderingResponse() {
         showTable(products);
         showContents(['profile-content', 'topnav', 'product-content']);
     } else {
-        onOtherResponse(schedulesContentDivEl, this);
+        alert("Some error occured try again");
     }
 }
 
@@ -167,7 +203,7 @@ function onProductResponse() {
         showProductDetails(product);
         showContents(['profile-content', 'topnav', 'product-display']);
     } else {
-        onOtherResponse(schedulesContentDivEl, this);
+        alert("Some error occured try again");
     }
 
 }
