@@ -57,11 +57,22 @@ function onSignaturesClicked() {
 function onSignaturesResponse() {
     if (this.status === OK) {
         let signaturesDto = JSON.parse(this.responseText);
-        document.getElementById('signature-display').appendChild(showSignatures(null, signaturesDto.allNames));
-        showContents(['signature-display', 'topnav', 'profile-content']);
+        isTableNeeded(signaturesDto.allNames);
     } else {
         alert("Some error occured try again");
     }
+
+}
+
+function isTableNeeded(signatures) {
+    let table = document.getElementById("signature-table");
+    if (table == null) {
+        document.getElementById('signature-display').appendChild(showSignatures(null, signatures));
+    } else {
+        table.remove();
+        document.getElementById('signature-display').appendChild(showSignatures(null, signatures));
+    }
+    showContents(['signature-display', 'topnav', 'profile-content']);
 
 }
 
@@ -81,7 +92,6 @@ function showSignatures(table, signatures) {
             let p = document.createElement('p');
             p.textContent = signature[j];
             tableDEl.appendChild(p);
-            console.log(signature[j]);
         }
         tableREl.appendChild(tableDEl);
         table.appendChild(tableREl);
