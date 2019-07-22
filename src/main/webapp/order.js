@@ -16,6 +16,6 @@ function onCheckoutResponse() {
         alert('Items checked out');
         showContents(['profile-content', 'topnav', 'product-content']);
     } else {
-        onOtherResponse(schedulesContentDivEl, this);
+        alert('Some error occured, try again');
     }
 }

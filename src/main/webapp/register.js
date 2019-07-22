@@ -24,7 +24,7 @@ function onRegisterResponse() {
     if (this.status === OK) {
         showContents(['login-content']);
     } else {
-        onOtherResponse(schedulesContentDivEl, this);
+        alert("Some error occured, try again later");
     }
 }
 

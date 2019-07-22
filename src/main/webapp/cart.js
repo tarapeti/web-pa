@@ -58,8 +58,9 @@ function onCartClikcedResponse() {
 
         }
     } else {
-        onOtherResponse(schedulesContentDivEl, this);
+        alert("Some error occured, try again later");
     }
+
 }
 
 function displayCart(cartItems)  {
