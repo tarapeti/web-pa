@@ -89,6 +89,9 @@
 
 <div id="cart-display" class="hidden content"></div>
 
+
+<div id="signature-display" class="hidden content"></div>
+
 <div id="logout-content" class="hidden content">
     <button id="logout-button">Logout</button>
 </div>
