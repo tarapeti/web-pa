@@ -128,4 +128,4 @@ VALUES (1, 1, 7, null, null),
        (2, 7, 10, null, null),
        (4, 8, 50, null, null);
 
-INSERT INTO signatures(pro_id, deck_id, grip_id, truck_id, wheel_id) values (3, 5, 6, 7, 8);
+INSERT INTO signatures(pro_id, deck_id, grip_id, truck_id, wheel_id) values (3, 5, 6, 7, 8), (3, 5, 6, 7, 8);
