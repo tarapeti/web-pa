@@ -43,44 +43,11 @@ public class SignaturesServlet extends AbstractServlet {
 
             SignaturesDto signaturesDto = signaturesService.replaceIdsWithNames(signatures, userService, productsService);
 
-
             sendMessage(resp, HttpServletResponse.SC_OK, signaturesDto);
         } catch (SQLException e) {
             handleSqlError(resp, e);
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())){
-
-            sendMessage(resp, HttpServletResponse.SC_OK, null);
-        } catch (SQLException e) {
-            handleSqlError(resp, e);
-        }
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())){
-
-            sendMessage(resp, HttpServletResponse.SC_OK, null);
-        } catch (SQLException e) {
-            handleSqlError(resp, e);
-        }
-
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try (Connection connection = getConnection(req.getServletContext())){
-
-            sendMessage(resp, HttpServletResponse.SC_OK, null);
-        } catch (SQLException e) {
-            handleSqlError(resp, e);
-        }
-
     }
 }

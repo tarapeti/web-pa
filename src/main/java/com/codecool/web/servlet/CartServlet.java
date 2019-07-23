@@ -1,19 +1,11 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.dao.OrdersDao;
 import com.codecool.web.dao.ProductsDao;
-import com.codecool.web.dao.database.DatabaseOrdersDao;
 import com.codecool.web.dao.database.DatabaseProductsDao;
-import com.codecool.web.dto.OrderDto;
 import com.codecool.web.dto.ProductsDto;
-import com.codecool.web.model.Order;
-import com.codecool.web.model.OrderDetail;
 import com.codecool.web.model.Product;
-import com.codecool.web.model.User;
-import com.codecool.web.service.OrdersService;
 import com.codecool.web.service.ProductsService;
 import com.codecool.web.service.exception.ServiceException;
-import com.codecool.web.service.simple.SimpleOrdersService;
 import com.codecool.web.service.simple.SimpleProductsService;
 
 
@@ -30,11 +22,6 @@ import java.util.List;
 
 @WebServlet("/cart")
 public class CartServlet extends AbstractServlet {
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection connection = getConnection(req.getServletContext())) {
@@ -58,10 +45,3 @@ public class CartServlet extends AbstractServlet {
         }
     }
 }
-
-//kellene elotte a cart és utána megrendelni??
-//nem serial orderid
-
-//VAGY átneezni cart és cartdetailre és az order nem csinálna igazábol semmit
-//productdetail popupba kéne navigáció egyszerűsítés miatt
-

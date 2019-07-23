@@ -7,7 +7,6 @@ import com.codecool.web.dao.database.DatabaseProductsDao;
 import com.codecool.web.dto.OrderDto;
 import com.codecool.web.model.Order;
 import com.codecool.web.model.OrderDetail;
-import com.codecool.web.model.Product;
 import com.codecool.web.model.User;
 import com.codecool.web.service.OrdersService;
 import com.codecool.web.service.ProductsService;
@@ -22,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/order")
@@ -39,8 +37,6 @@ public class OrderServlet extends AbstractServlet {
 
             List<Order> orders = ordersService.getbyCustomerId(userId);
             List<OrderDetail> orderDetails = ordersService.findOrderDetailsForEachOrder(orders);
-
-
 
             sendMessage(resp, HttpServletResponse.SC_OK, new OrderDto(orders, orderDetails));
         } catch (SQLException e) {
@@ -66,11 +62,11 @@ public class OrderServlet extends AbstractServlet {
 
             long currentTimeMillis = System.currentTimeMillis();
 
-
             String productIds = req.getParameter("productIds");
             String[] prodIds = productIds.split(",");
 
-            for (int i = 0; i < prodIds.length ; i++) {
+            //refactor mb
+            for (int i = 0; i < prodIds.length; i++) {
                 int price = productsService.getbyId(Integer.parseInt(prodIds[i])).getPrice();
                 ordersService.order(userId, prodIds[i], price, currentTimeMillis);
             }
