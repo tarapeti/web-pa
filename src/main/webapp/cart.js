@@ -48,7 +48,6 @@ function onCartClikcedResponse() {
                     coButton.remove();
                     document.getElementById('cart-display').appendChild(emptyCart);
                 }
-                //document.getElementById('cart-display').appendChild(emptyCart);
             }else{
                 table.remove();
                 coButton.remove();

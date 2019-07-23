@@ -49,12 +49,6 @@ function showContents(ids) {
     }
 }
 
-function removeAllChildren(el) {
-    while (el.firstChild) {
-        el.removeChild(el.firstChild);
-    }
-}
-
 function onNetworkError(response) {
     document.body.remove();
     const bodyEl = document.createElement('body');

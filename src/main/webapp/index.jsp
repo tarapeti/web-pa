@@ -11,7 +11,6 @@
     <c:url value="/login.js" var="loginScriptUrl"/>
     <c:url value="/profile.js" var="profileScriptUrl"/>
     <c:url value="/products.js" var="productsSriptUrl"/>
-    <c:url value="/back-to-profile.js" var="backToProfileScriptUrl"/>
     <c:url value="/logout.js" var="logoutScriptUrl"/>
     <c:url value="/cart.js" var="cartScriptUrl"/>
     <c:url value="/order.js" var="orderScriptUrl"/>
@@ -21,7 +20,6 @@
     <script src="${registerScriptUrl}"></script>
     <script src="${profileScriptUrl}"></script>
     <script src="${productsSriptUrl}"></script>
-    <script src="${backToProfileScriptUrl}"></script>
     <script src="${logoutScriptUrl}"></script>
     <script src="${cartScriptUrl}"></script>
     <script src="${orderScriptUrl}"></script>
