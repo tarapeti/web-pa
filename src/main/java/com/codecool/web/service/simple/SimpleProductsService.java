@@ -1,14 +1,10 @@
 package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.ProductsDao;
-import com.codecool.web.dao.TypesDao;
-import com.codecool.web.dao.database.DatabaseTypesDao;
 import com.codecool.web.model.Product;
 import com.codecool.web.service.ProductsService;
-import com.codecool.web.service.TypesService;
 import com.codecool.web.service.exception.ServiceException;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
