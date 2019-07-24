@@ -1,6 +1,11 @@
 function onProfileLoad(user) {
     clearMessages();
-    showContents(['profile-content', 'topnav']);
+    if (user.role === true){
+        showContents(['profile-content', 'topnav', 'pro-content']);
+
+    } else{
+        showContents(['profile-content', 'topnav']);
+    }
 
 }
 
@@ -14,4 +19,5 @@ function closeNav() {
 
 function onBackToProfileClicked() {
     showContents(['profile-content', 'logout-content']);
+
 }
