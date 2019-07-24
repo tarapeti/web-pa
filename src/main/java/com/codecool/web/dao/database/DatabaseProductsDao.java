@@ -28,10 +28,10 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
     }
 
     @Override
-    public List<Product> findbyName(String name) throws SQLException {
-        String sql = "SELECT * FROM products WHERE name = ?";
+    public List<Product> findbyName(String productname) throws SQLException {
+        String sql = "SELECT * FROM products WHERE productname = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, name);
+            statement.setString(1, productname);
             List<Product> products = new ArrayList<>();
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
@@ -131,13 +131,25 @@ public class DatabaseProductsDao extends AbstractDao implements ProductsDao {
 
     }
 
+    @Override
+    public void addProduct(int typeId, String productname, String brand, int price) throws SQLException {
+        String sql = "INSERT INTO products (type_id, productname, brand, price) VALUES (?, ?, ?,?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, typeId);
+            statement.setString(2, productname);
+            statement.setString(3, brand);
+            statement.setInt(4, price);
+            statement.execute();
+        }
+    }
+
     private Product fetchProduct(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         int typeId = resultSet.getInt("type_id");
-        String name = resultSet.getString("name");
+        String productname = resultSet.getString("productname");
         String brand = resultSet.getString("brand");
         int price = resultSet.getInt("price");
-        return new Product(id, typeId, name, brand, price);
+        return new Product(id, typeId, productname, brand, price);
     }
 
 }

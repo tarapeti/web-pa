@@ -24,5 +24,7 @@ public interface ProductsService {
 
     List<Product> getProductByTypeId(String type) throws SQLException, ServiceException;
 
+    void addProduct(String typeId, String name, String brand, String price) throws SQLException, ServiceException;
+
 
 }

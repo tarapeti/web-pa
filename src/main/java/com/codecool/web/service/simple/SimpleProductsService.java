@@ -67,4 +67,15 @@ public class SimpleProductsService implements ProductsService {
             throw new ServiceException(ex.getMessage());
         }
     }
+
+    @Override
+    public void addProduct(String typeId, String name, String brand, String price) throws SQLException, ServiceException {
+        try {
+            productsDao.addProduct(Integer.parseInt(typeId), name, brand, Integer.parseInt(price));
+        } catch (NumberFormatException ex) {
+            throw new ServiceException("typeId must be an integer");
+        } catch (IllegalArgumentException ex) {
+            throw new ServiceException(ex.getMessage());
+        }
+    }
 }

@@ -24,5 +24,7 @@ public interface ProductsDao {
 
     List<Product> findProductByTypeId(int type) throws SQLException;
 
+    void addProduct(int typeId, String name, String brand, int price) throws SQLException;
+
 
 }
