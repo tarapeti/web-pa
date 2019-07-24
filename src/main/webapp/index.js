@@ -6,7 +6,6 @@ const INTERNAL_SERVER_ERROR = 500;
 
 let loginContentDivEl;
 let profileContentDivEl;
-let backToProfileContentDivEl;
 let logoutContentDivEl;
 let regContentDivEl;
 
@@ -91,7 +90,6 @@ function setUnauthorized() {
 function onLoad() {
     loginContentDivEl = document.getElementById('login-content');
     profileContentDivEl = document.getElementById('profile-content');
-    backToProfileContentDivEl = document.getElementById('back-to-profile-content');
     logoutContentDivEl = document.getElementById('logout-content');
     regContentDivEl = document.getElementById("reg-content");
 
