@@ -28,7 +28,7 @@ CREATE TABLE products
 (
     id      SERIAL PRIMARY KEY,
     type_id int,
-    name    text,
+    productname    text,
     brand   text,
     price   int,
     foreign key (type_id) references types_table (id)
@@ -101,7 +101,7 @@ VALUES ('deck'),
        ('wheel'),
        ('other');
 
-INSERT INTO products(type_id, name, brand, price)
+INSERT INTO products(type_id, productname, brand, price)
 VALUES (1, 'OG Logo Red Mini Deck', 'BLIND', 30),
        (2, 'Green/Yellow Griptape', 'Shake Junt', 10),
        (3, 'Black Widow Full Dip Scripts Truck', 'Thunder', 22),
