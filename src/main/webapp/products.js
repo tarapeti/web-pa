@@ -179,7 +179,7 @@ function onAllDecksClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onAllProductsResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'product?' + params.toString());
+    xhr.open('GET', 'products?' + params.toString());
     xhr.send();
 }
 
