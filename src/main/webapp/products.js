@@ -276,3 +276,33 @@ function displayProduct(table, product) {
     return productDisplayTable;
 
 }
+
+function addNewProduct() {
+    const loginFormEl = document.forms['add-form'];
+    const typeSelector = document.getElementById("type");
+
+    const pNameInputEl = loginFormEl.querySelector('input[name="name"]');
+    const brandInputEl = loginFormEl.querySelector('input[name="brand"]');
+    const priceInputEl = loginFormEl.querySelector('input[name="price"]');
+
+    const typeValue = typeSelector.options[typeSelector.selectedIndex].value;
+    const name = pNameInputEl.value;
+    const brand = brandInputEl.value;
+    const price = priceInputEl.value;
+
+    const params = new URLSearchParams();
+    params.append('name', name);
+    params.append('type', typeValue);
+    params.append('brand', brand);
+    params.append('price', price);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', addProductResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'product?' + params.toString());
+    xhr.send();
+}
+
+function addProductResponse() {
+    alert("Product added!");
+}
