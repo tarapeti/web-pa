@@ -31,11 +31,11 @@ function onCartClikcedResponse() {
             if(document.getElementById('empty') == null){
                 let json = JSON.parse(this.responseText);
                 let cartItems = json.products;
-                console.log(cartItems);
                 displayCart(cartItems);
             }else{
                 emptyCart.remove();
                 coButton.remove();
+                displayCart(cartItems);
             }
         }catch (e) {
             let empty = document.getElementById('empty');
@@ -45,7 +45,6 @@ function onCartClikcedResponse() {
                     document.getElementById('cart-display').appendChild(emptyCart);
                 } else{
                     empty.remove();
-                    coButton.remove();
                     document.getElementById('cart-display').appendChild(emptyCart);
                 }
             }else{
@@ -79,7 +78,6 @@ function displayCart(cartItems)  {
 
 
 function generateSimpleTable(table, cartItems) {
-    console.log(cartItems);
     if (!table) table = document.createElement('table');
 
     table.setAttribute('id', "cart-table");
