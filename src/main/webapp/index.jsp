@@ -31,6 +31,7 @@
     <a href="javascript:void(0);" onclick="onAllProductsClicked()">All products</a>
     <a href="javascript:void(0);" onclick="onSignaturesClicked();">Signature kits</a>
     <a href="javascript:void(0);" onclick="onCartClikced();">Cart</a>
+    <a href="javascript:void(0);" onclick="onBackToProfileClicked();">Back to profile</a>
 </div>
 
 
@@ -65,11 +66,6 @@
     </form>
 </div>
 
-<div id="back-to-profile-content" class="hidden content">
-    <br>
-    <button onclick="onBackToProfileClicked();">Back to profile</button>
-</div>
-
 <div id="profile-content" class="hidden content">
 
 </div>
@@ -89,6 +85,26 @@
 
 
 <div id="signature-display" class="hidden content"></div>
+
+<div id="pro-content" class="hidden content">
+    <h1>Welcome to this beautiful pro page</h1>
+    <h2>Add an item</h2>
+    <form id="add-form" onsubmit="return false;">
+        Name: <input type="text" name="name" required><br>
+        Type :<select id="type" name="type-selector">
+            <option value="1">Deck</option>
+            <option value="2">Grip</option>
+            <option value="3">Truck</option>
+            <option value="4">Wheel</option>
+        </select><br>
+        Brand: <input type="text" name="brand" required><br>
+        Price<input type="number" name="price" required>
+        <br>
+        <button id="add-product" onclick="addNewProduct()">Add new product</button>
+    </form>
+
+
+</div>
 
 <div id="logout-content" class="hidden content">
     <button id="logout-button">Logout</button>
