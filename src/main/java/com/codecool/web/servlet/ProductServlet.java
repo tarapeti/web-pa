@@ -34,4 +34,25 @@ public class ProductServlet extends AbstractServlet {
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            ProductsDao productsDao = new DatabaseProductsDao(connection);
+            ProductsService productsService = new SimpleProductsService(productsDao);
+
+            String name = req.getParameter("name");
+            String type = req.getParameter("type");
+            String brand = req.getParameter("brand");
+            String price = req.getParameter("price");
+
+            productsService.addProduct(type, name, brand, price);
+
+            sendMessage(resp, HttpServletResponse.SC_OK, null);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+    }
 }
